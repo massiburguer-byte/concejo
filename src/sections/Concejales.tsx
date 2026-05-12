@@ -125,7 +125,7 @@ export default function Concejales() {
                   <img
                     src={c.image}
                     alt={c.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent" />
                 </div>
