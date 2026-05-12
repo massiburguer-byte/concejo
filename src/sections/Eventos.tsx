@@ -49,26 +49,26 @@ export default function Eventos() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="eventos" className="relative py-24 sm:py-32 bg-navy-900/50">
+    <section id="eventos" className="relative py-24 sm:py-32 bg-navy-950 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 300, damping: 30, bounce: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <Badge
             variant="outline"
-            className="mb-4 px-4 py-1.5 text-xs font-bold uppercase tracking-widest border-primary/30 text-primary bg-primary/10"
+            className="mb-4 px-4 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.2em] border-primary/30 text-primary bg-primary/10"
           >
             Próximamente
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white mb-6">
             Agenda Legislativa
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Participa en las sesiones y eventos abiertos del concejo municipal.
+          <p className="mt-4 text-white/50 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            Mantente informado sobre las sesiones, cabildos y eventos oficiales abiertos a la participación ciudadana en nuestro municipio.
           </p>
         </motion.div>
 
@@ -80,58 +80,55 @@ export default function Eventos() {
           className="relative"
         >
           {/* Timeline line */}
-          <div className="absolute left-8 sm:left-12 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
+          <div className="absolute left-10 sm:left-10 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-white/5 to-transparent" />
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8">
             {eventos.map((e, i) => (
               <motion.div
                 key={i}
                 variants={itemVariants}
-                className="group relative flex gap-4 sm:gap-8 pl-2"
+                className="group relative flex gap-6 sm:gap-12"
               >
                 {/* Date bubble */}
-                <div className="relative z-10 flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex flex-col items-center justify-center bg-card border border-white/10 group-hover:border-primary/40 group-hover:bg-primary/10 transition-all duration-300 shadow-lg">
-                  <span className="text-lg sm:text-xl font-extrabold leading-none text-foreground">
+                <div className="relative z-10 flex-shrink-0 w-20 h-20 rounded-3xl flex flex-col items-center justify-center bg-navy-900 border border-white/5 group-hover:border-primary/50 transition-all duration-500 shadow-2xl group-hover:shadow-glow group-hover:-translate-y-1">
+                  <span className="text-3xl font-black leading-none text-white mb-1">
                     {e.day}
                   </span>
-                  <span className="text-[0.6rem] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-primary">
                     {e.month}
                   </span>
                 </div>
 
-                {/* Connector dot */}
-                <div className="absolute left-[2.6rem] sm:left-[3.3rem] top-6 w-3 h-3 rounded-full bg-primary border-2 border-navy-900 shadow-glow group-hover:scale-125 transition-transform" />
-
                 {/* Card */}
-                <div className="flex-1 rounded-2xl bg-card border border-white/5 p-5 sm:p-6 hover:border-primary/20 transition-all duration-300 group-hover:-translate-y-0.5">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                    <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
+                <div className="flex-1 glass-card rounded-[2.5rem] p-8 group-hover:-translate-y-1 transition-all duration-500">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <h3 className="text-xl font-black text-white group-hover:text-primary transition-colors tracking-tight leading-none">
                       {e.title}
                     </h3>
                     <span
-                      className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider self-start ${
+                      className={`inline-flex items-center px-4 py-1.5 rounded-full text-[0.6rem] font-black uppercase tracking-widest self-start ${
                         e.type === "open"
-                          ? "bg-gold/10 text-gold border border-gold/20"
-                          : "bg-primary/10 text-primary border border-primary/20"
+                          ? "bg-accent/20 text-accent border border-accent/20 shadow-glow"
+                          : "bg-primary text-white shadow-glow"
                       }`}
                     >
-                      {e.type === "open" ? "Cabildo" : "Sesión"}
+                      {e.type === "open" ? "Evento Abierto" : "Sesión Legislativa"}
                     </span>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                  <p className="text-xs text-white/50 mb-8 leading-relaxed max-w-xl group-hover:text-white/70 transition-colors">
                     {e.description}
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-                    <span className="inline-flex items-center gap-1.5">
+                  <div className="flex flex-wrap items-center gap-6">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-[0.65rem] font-bold text-white/60">
                       <Clock className="w-3.5 h-3.5 text-primary" />
                       {e.time}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-[0.65rem] font-bold text-white/60">
                       <MapPin className="w-3.5 h-3.5 text-primary" />
                       {e.location}
-                    </span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
