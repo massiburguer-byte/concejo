@@ -4,7 +4,7 @@ import AccesosRapidos from "./sections/AccesosRapidos";
 import Concejales from "./sections/Concejales";
 import Organigrama from "./sections/Organigrama";
 import Noticias from "./sections/Noticias";
-import Eventos from "./sections/Eventos";
+import RedesSociales from "./sections/RedesSociales";
 import Ordenanzas from "./sections/Ordenanzas";
 import Contacto from "./sections/Contacto";
 import Footer from "./sections/Footer";
@@ -20,7 +20,7 @@ export default function App() {
         <Organigrama />
         <Ordenanzas />
         <Noticias />
-        <Eventos />
+        <RedesSociales />
         <Contacto />
       </main>
       <Footer />
