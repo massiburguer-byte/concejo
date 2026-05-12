@@ -2,6 +2,7 @@ import Navbar from "./sections/Navbar";
 import Hero from "./sections/Hero";
 import AccesosRapidos from "./sections/AccesosRapidos";
 import Concejales from "./sections/Concejales";
+import Organigrama from "./sections/Organigrama";
 import Noticias from "./sections/Noticias";
 import Eventos from "./sections/Eventos";
 import Ordenanzas from "./sections/Ordenanzas";
@@ -16,6 +17,7 @@ export default function App() {
         <Hero />
         <AccesosRapidos />
         <Concejales />
+        <Organigrama />
         <Ordenanzas />
         <Noticias />
         <Eventos />
