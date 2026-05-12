@@ -17,6 +17,7 @@ const navLinks = [
   },
   { href: "#ordenanzas", label: "Ordenanzas" },
   { href: "#noticias", label: "Noticias" },
+  { href: "#redes", label: "Redes" },
   { href: "#contacto", label: "Contacto" },
 ];
 
