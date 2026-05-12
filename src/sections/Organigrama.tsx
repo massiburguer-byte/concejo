@@ -203,9 +203,13 @@ export default function Organigrama() {
             <p className="text-xs text-white/40 leading-relaxed mb-6">
               Para ver el detalle técnico completo y las coordinaciones subordinadas, puedes descargar o visualizar el organigrama institucional en alta resolución.
             </p>
-            <button className="px-8 py-4 rounded-2xl bg-primary hover:bg-primary/90 text-white text-[0.7rem] font-black uppercase tracking-widest shadow-glow transition-all hover:-translate-y-1">
-              Ver Organigrama Institucional HD
-            </button>
+            <a 
+              href="/images/organigrama.png" 
+              download="Organigrama_Concejo_Maneiro.png"
+              className="px-8 py-4 rounded-2xl bg-primary hover:bg-primary/90 text-white text-[0.7rem] font-black uppercase tracking-widest shadow-glow transition-all hover:-translate-y-1 inline-flex items-center gap-2"
+            >
+              Descargar Organigrama Institucional HD
+            </a>
           </div>
         </motion.div>
       </div>
