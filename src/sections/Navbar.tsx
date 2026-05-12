@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Eye, EyeOff } from "lucide-react";
+import { useAccessibility } from "@/hooks/useAccessibility";
 
 const navLinks = [
   { href: "#inicio", label: "Inicio" },
@@ -24,6 +25,7 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
   const [isConcejoOpen, setIsConcejoOpen] = useState(false);
+  const { isEasyRead, toggleEasyRead } = useAccessibility();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -142,19 +144,44 @@ export default function Navbar() {
               </a>
             )
           ))}
+
+          <div className="h-6 w-[1px] bg-white/10 mx-2" />
+          
+          <button
+            onClick={toggleEasyRead}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[0.65rem] font-bold uppercase tracking-wider transition-all ${
+              isEasyRead 
+                ? "bg-primary text-white shadow-glow" 
+                : "bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
+            }`}
+            title={isEasyRead ? "Desactivar Lectura Fácil" : "Activar Lectura Fácil"}
+          >
+            {isEasyRead ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+            <span>Lectura Fácil</span>
+          </button>
         </div>
 
         {/* Mobile toggle */}
-        <button
-          className="md:hidden w-10 h-10 rounded-xl glass flex items-center justify-center"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-        >
-          {isMobileOpen ? (
-            <X className="w-5 h-5 text-white" />
-          ) : (
-            <Menu className="w-5 h-5 text-white" />
-          )}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            onClick={toggleEasyRead}
+            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+              isEasyRead ? "bg-primary text-white" : "glass text-white"
+            }`}
+          >
+            {isEasyRead ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
+          <button
+            className="w-10 h-10 rounded-xl glass flex items-center justify-center"
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+          >
+            {isMobileOpen ? (
+              <X className="w-5 h-5 text-white" />
+            ) : (
+              <Menu className="w-5 h-5 text-white" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
