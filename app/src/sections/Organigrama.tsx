@@ -6,7 +6,6 @@ import {
   Scale, 
   FileText, 
   Briefcase,
-  ChevronDown,
   Info
 } from "lucide-react";
 
