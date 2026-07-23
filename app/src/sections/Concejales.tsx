@@ -93,7 +93,7 @@ export default function Concejales() {
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
         >
-          {concejales.map((c, i) => (
+          {concejales.map((c) => (
             <motion.div
               key={c.name}
               variants={cardVariants}
