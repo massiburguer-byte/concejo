@@ -4,43 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const noticias = [
-  {
-    title: "Maneiro se une en una sola fe por el Santísimo Cristo del Buen Viaje",
-    date: "04 MAY, 2026",
-    image: "/images/noticias/noticia-1.jpg",
-    excerpt: "Autoridades y concejales acompañaron a la comunidad de Pampatar en la celebración litúrgica y cultural del Santo Patrono.",
-    category: "Religión",
-  },
-  {
-    title: "Excelencia y Mérito: Sesión Solemne en Honor al Santo Patrono",
-    date: "03 MAY, 2026",
-    image: "/images/noticias/noticia-2.jpg",
-    excerpt: "Distinguimos a personalidades que son orgullo de nuestra tierra por sus méritos y aporte a la sociedad maneirense.",
-    category: "Gala",
-  },
-  {
-    title: "Consulta Pública: Construyendo el Futuro de Maneiro",
-    date: "30 ABR, 2026",
-    image: "/images/noticias/noticia-3.jpg",
-    excerpt: "Debatimos instrumentos legales fundamentales sobre desarrollo urbano y gestión eficiente de ejidos municipales.",
-    category: "Legislación",
-  },
-  {
-    title: "Avanza la Construcción de la Ordenanza de la Mujer",
-    date: "25 ABR, 2026",
-    image: "/images/noticias/noticia-4.jpg",
-    excerpt: "Primera mesa técnica para fortalecer el rol femenino, el emprendimiento y la autonomía económica en el municipio.",
-    category: "Social",
-  },
-  {
-    title: "Bajada del Santísimo Cristo: Tradición y Fe Inquebrantable",
-    date: "20 ABR, 2026",
-    image: "/images/noticias/noticia-5.jpg",
-    excerpt: "El pueblo de Maneiro se reencuentra con su protector en un momento de profunda devoción y esperanza para cada hogar.",
-    category: "Tradición",
-  },
-];
+const modules = import.meta.glob('../data/noticias/*.json', { eager: true });
+const noticias = Object.keys(modules)
+  .sort()
+  .reverse()
+  .map((key) => (modules[key] as any).default || modules[key]);
 
 export default function Noticias() {
   const [currentIndex, setCurrentIndex] = useState(0);

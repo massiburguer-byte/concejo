@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "app/public/images/noticias"
+public_folder: "/images/noticias"
+
+collections:
+  - name: "noticias"
+    label: "Noticias"
+    folder: "app/src/data/noticias"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: "json"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha", name: "date", widget: "datetime", format: "DD MMM, YYYY", date_format: "DD MMM, YYYY", time_format: false}
+      - {label: "Imagen", name: "image", widget: "image"}
+      - {label: "Extracto", name: "excerpt", widget: "text"}
+      - {label: "Categoría", name: "category", widget: "string"}
