@@ -13,12 +13,12 @@ const concejales = [
   },
   {
     name: "Eulys Cedeño",
-    role: "Vicepresidenta",
+    role: "1ra Vicepresidenta",
     image: "/images/concejales/eulys.png",
   },
   {
     name: "José Gregorio Marcano",
-    role: "Concejal",
+    role: "2do Vicepresidente",
     image: "/images/concejales/gregorio.png",
   },
   {
