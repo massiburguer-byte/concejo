@@ -95,7 +95,7 @@ export default function Navbar() {
                   className={`flex items-center gap-1 px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors rounded-lg ${
                     link.submenu.some(s => s.href.replace("#", "") === activeSection)
                       ? "text-primary bg-primary/10"
-                      : "text-white hover:text-primary hover:bg-white/5"
+                      : `${isScrolled ? "text-slate-800 hover:text-primary hover:bg-slate-100/50" : "text-white hover:text-primary hover:bg-white/5"}`
                   }`}
                 >
                   {link.label}
@@ -119,7 +119,7 @@ export default function Navbar() {
                             className={`px-4 py-2.5 rounded-lg text-[0.7rem] font-bold uppercase tracking-wide transition-all ${
                               activeSection === sub.href.replace("#", "")
                                 ? "bg-primary text-white shadow-lg"
-                                : "text-white/80 hover:bg-white/10 hover:text-white"
+                                : "text-slate-700 hover:bg-slate-100 hover:text-primary"
                             }`}
                           >
                             {sub.label}
@@ -138,7 +138,7 @@ export default function Navbar() {
                 className={`relative px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors rounded-lg drop-shadow-md ${
                   activeSection === link.href!.replace("#", "")
                     ? "text-primary bg-primary/10"
-                    : "text-white hover:text-primary hover:bg-white/5"
+                    : `${isScrolled ? "text-slate-800 hover:text-primary hover:bg-slate-100/50" : "text-white hover:text-primary hover:bg-white/5"}`
                 }`}
               >
                 <span className="relative z-10">{link.label}</span>
@@ -146,14 +146,16 @@ export default function Navbar() {
             )
           ))}
 
-          <div className="h-6 w-[1px] bg-white/10 mx-2" />
+          <div className={`h-6 w-[1px] mx-2 ${isScrolled ? "bg-slate-200" : "bg-white/10"}`} />
           
           <button
             onClick={toggleEasyRead}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[0.65rem] font-bold uppercase tracking-wider transition-all ${
               isEasyRead 
                 ? "bg-primary text-white shadow-glow" 
-                : "bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
+                : isScrolled
+                  ? "bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900"
+                  : "bg-white/5 text-white/80 hover:bg-white/10 hover:text-white"
             }`}
             title={isEasyRead ? "Desactivar Lectura Fácil" : "Activar Lectura Fácil"}
           >
@@ -167,19 +169,21 @@ export default function Navbar() {
           <button
             onClick={toggleEasyRead}
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-              isEasyRead ? "bg-primary text-white" : "glass text-white"
+              isEasyRead ? "bg-primary text-white" : isScrolled ? "bg-slate-100 text-slate-700" : "glass text-white"
             }`}
           >
             {isEasyRead ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
           <button
-            className="w-10 h-10 rounded-xl glass flex items-center justify-center"
+            className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+              isScrolled ? "bg-slate-100 text-slate-700" : "glass text-white"
+            }`}
             onClick={() => setIsMobileOpen(!isMobileOpen)}
           >
             {isMobileOpen ? (
-              <X className="w-5 h-5 text-white" />
+              <X className={`w-5 h-5 ${isScrolled ? "text-slate-800" : "text-white"}`} />
             ) : (
-              <Menu className="w-5 h-5 text-white" />
+              <Menu className={`w-5 h-5 ${isScrolled ? "text-slate-800" : "text-white"}`} />
             )}
           </button>
         </div>
@@ -210,7 +214,7 @@ export default function Navbar() {
                           className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
                             activeSection === sub.href.replace("#", "")
                               ? "bg-primary/20 text-primary border border-primary/10"
-                              : "text-white/60 hover:bg-white/5 hover:text-white"
+                              : "text-slate-700 hover:bg-slate-100 hover:text-primary"
                           }`}
                         >
                           {sub.label}
@@ -228,7 +232,7 @@ export default function Navbar() {
                       className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all flex items-center ${
                         activeSection === link.href!.replace("#", "")
                           ? "bg-primary/20 text-primary border border-primary/10"
-                          : "text-white/60 hover:bg-white/5 hover:text-white"
+                          : "text-slate-700 hover:bg-slate-100 hover:text-primary"
                       }`}
                     >
                       {link.label}

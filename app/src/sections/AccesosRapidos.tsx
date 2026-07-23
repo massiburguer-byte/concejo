@@ -36,7 +36,7 @@ export default function AccesosRapidos() {
   };
 
   return (
-    <section className="relative z-20 py-8 px-4 bg-navy-950">
+    <section className="relative z-20 py-8 px-4 bg-gradient-to-b from-[#f3f7fa] to-white">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {accesos.map((acceso, i) => (
@@ -50,7 +50,7 @@ export default function AccesosRapidos() {
               onClick={() => handleScroll(acceso.href)}
               className="group cursor-pointer"
             >
-              <div className="relative overflow-hidden rounded-[2rem] glass-premium transition-all duration-500 group-hover:shadow-premium group-hover:-translate-y-1">
+              <div className="relative overflow-hidden rounded-[2rem] bg-white border-2 border-gray-300 shadow-md transition-all duration-500 group-hover:shadow-premium group-hover:-translate-y-1 group-hover:border-primary/40">
                 {/* Image Container */}
                 <div className="aspect-[16/10] overflow-hidden flex items-center justify-center p-6 bg-white">
                   <img
@@ -60,10 +60,10 @@ export default function AccesosRapidos() {
                   />
                 </div>
                 <div className="p-6 pt-0 text-center">
-                  <h3 className="text-sm font-bold text-white group-hover:text-primary transition-colors mb-2 uppercase tracking-wide">
+                  <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors mb-2 uppercase tracking-wide">
                     {acceso.title}
                   </h3>
-                  <p className="text-[0.65rem] text-white/50 leading-relaxed line-clamp-1">
+                  <p className="text-[0.65rem] text-muted-foreground leading-relaxed line-clamp-1">
                     {acceso.description}
                   </p>
                 </div>

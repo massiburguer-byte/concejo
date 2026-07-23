@@ -54,7 +54,7 @@ export default function Noticias() {
   };
 
   return (
-    <section id="noticias" className="relative py-20 bg-navy-950/50">
+    <section id="noticias" className="relative py-20 bg-gradient-to-b from-[#f0f4f8] to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
           <motion.div
@@ -69,7 +69,7 @@ export default function Noticias() {
             >
               Novedades
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
               Noticias Recientes
             </h2>
           </motion.div>
@@ -79,7 +79,7 @@ export default function Noticias() {
               variant="outline"
               size="icon"
               onClick={prev}
-              className="rounded-full border-white/10 bg-white/5 hover:bg-primary hover:text-white transition-all"
+              className="rounded-full border-slate-200 bg-white text-slate-700 hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
             >
               <ChevronLeft className="w-5 h-5" />
             </Button>
@@ -87,7 +87,7 @@ export default function Noticias() {
               variant="outline"
               size="icon"
               onClick={next}
-              className="rounded-full border-white/10 bg-white/5 hover:bg-primary hover:text-white transition-all"
+              className="rounded-full border-slate-200 bg-white text-slate-700 hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
             >
               <ChevronRight className="w-5 h-5" />
             </Button>
@@ -114,29 +114,29 @@ export default function Noticias() {
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800";
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-80" />
-                  <div className="absolute top-6 left-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-80 z-10" />
+                  <div className="absolute top-6 left-6 z-20">
                     <span className="px-4 py-1.5 rounded-full text-[0.6rem] font-black uppercase tracking-widest bg-primary text-white shadow-glow">
                       {n.category}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-8">
+                <div className="p-8 relative z-20">
                   <div className="flex items-center gap-2 text-primary text-[0.65rem] font-black uppercase tracking-widest mb-4">
                     <Calendar className="w-3.5 h-3.5" />
                     {n.date}
                   </div>
 
-                  <h3 className="text-xl font-black text-white mb-4 group-hover:text-primary transition-all duration-300 leading-[1.2] line-clamp-2 tracking-tight">
+                  <h3 className="text-xl font-black text-foreground mb-4 group-hover:text-primary transition-all duration-300 leading-[1.2] line-clamp-2 tracking-tight">
                     {n.title}
                   </h3>
 
-                  <p className="text-xs text-white/50 leading-relaxed mb-8 line-clamp-2 group-hover:text-white/70 transition-colors">
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-8 line-clamp-2 group-hover:text-foreground/80 transition-colors">
                     {n.excerpt}
                   </p>
 
-                  <button className="w-full py-4 rounded-2xl bg-white/5 border border-white/5 text-[0.7rem] font-black uppercase tracking-[0.2em] text-white/60 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-500 flex items-center justify-center gap-2">
+                  <button className="w-full py-4 rounded-2xl bg-slate-50 border border-slate-200/60 text-[0.7rem] font-black uppercase tracking-[0.2em] text-slate-600 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-500 flex items-center justify-center gap-2">
                     Leer artículo completo
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </button>
@@ -153,7 +153,7 @@ export default function Noticias() {
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                currentIndex === i ? "w-8 bg-primary" : "w-2 bg-white/10"
+                currentIndex === i ? "w-8 bg-primary" : "w-2 bg-slate-200"
               }`}
             />
           ))}

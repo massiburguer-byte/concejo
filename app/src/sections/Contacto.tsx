@@ -26,7 +26,7 @@ export default function Contacto() {
   };
 
   return (
-    <section id="contacto" className="relative py-24 sm:py-32">
+    <section id="contacto" className="relative py-24 sm:py-32 bg-[#f0f4f8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function Contacto() {
             className="flex flex-col gap-6"
           >
             <div className="rounded-[2.5rem] glass-card p-8 sm:p-10">
-              <h3 className="text-2xl font-black mb-8 flex items-center gap-3 text-white tracking-tight">
+              <h3 className="text-2xl font-black mb-8 flex items-center gap-3 text-slate-800 tracking-tight">
                 <MessageSquare className="w-6 h-6 text-primary" />
                 Canales de Atención
               </h3>
@@ -74,7 +74,7 @@ export default function Contacto() {
                   </div>
                   <div>
                     <p className="text-[0.65rem] font-black uppercase tracking-widest text-primary mb-1">Correo Electrónico</p>
-                    <p className="text-lg font-bold text-white/80 group-hover:text-white transition-colors">
+                    <p className="text-lg font-bold text-slate-700 group-hover:text-primary transition-colors">
                       info@concejomaneiro.gob.ve
                     </p>
                   </div>
@@ -86,7 +86,7 @@ export default function Contacto() {
                   </div>
                   <div>
                     <p className="text-[0.65rem] font-black uppercase tracking-widest text-primary mb-1">Central Telefónica</p>
-                    <p className="text-lg font-bold text-white/80">
+                    <p className="text-lg font-bold text-slate-700">
                       +58 (295) 555-0100
                     </p>
                   </div>
@@ -98,7 +98,7 @@ export default function Contacto() {
                   </div>
                   <div>
                     <p className="text-[0.65rem] font-black uppercase tracking-widest text-primary mb-1">Sede Administrativa</p>
-                    <p className="text-base font-bold text-white/80 leading-relaxed">
+                    <p className="text-base font-bold text-slate-700 leading-relaxed">
                       Av. Bolívar, Edificio Concejo Municipal, Pampatar, Municipio Maneiro, Nueva Esparta.
                     </p>
                   </div>
@@ -108,21 +108,21 @@ export default function Contacto() {
 
             {/* Quick actions */}
             <div className="rounded-[2.5rem] glass-card p-8 sm:p-10">
-              <h3 className="text-xl font-black mb-6 text-white tracking-tight">Accesos Directos</h3>
+              <h3 className="text-xl font-black mb-6 text-slate-800 tracking-tight">Accesos Directos</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <a
                   href="#"
-                  className="flex items-center justify-center gap-3 py-4 rounded-2xl bg-white/5 hover:bg-primary border border-white/5 hover:border-primary transition-all duration-500 group"
+                  className="flex items-center justify-center gap-3 py-4 rounded-2xl bg-slate-50 hover:bg-primary border border-slate-200/80 hover:border-primary transition-all duration-500 group"
                 >
                   <Mail className="w-5 h-5 text-primary group-hover:text-white" />
-                  <span className="text-xs font-black uppercase tracking-widest text-white/60 group-hover:text-white">Enviar Correo</span>
+                  <span className="text-xs font-black uppercase tracking-widest text-slate-600 group-hover:text-white">Enviar Correo</span>
                 </a>
                 <a
                   href="#"
-                  className="flex items-center justify-center gap-3 py-4 rounded-2xl bg-white/5 hover:bg-accent border border-white/5 hover:border-accent transition-all duration-500 group"
+                  className="flex items-center justify-center gap-3 py-4 rounded-2xl bg-slate-50 hover:bg-accent border border-slate-200/80 hover:border-accent transition-all duration-500 group"
                 >
                   <MessageSquare className="w-5 h-5 text-accent group-hover:text-white" />
-                  <span className="text-xs font-black uppercase tracking-widest text-white/60 group-hover:text-white">WhatsApp</span>
+                  <span className="text-xs font-black uppercase tracking-widest text-slate-600 group-hover:text-white">WhatsApp</span>
                 </a>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Contacto() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="rounded-[2.5rem] glass-card p-8 sm:p-10"
           >
-            <h3 className="text-xl font-bold mb-6">Enviar Mensaje</h3>
+            <h3 className="text-xl font-bold mb-6 text-slate-800">Enviar Mensaje</h3>
 
             {submitted ? (
               <motion.div
@@ -166,7 +166,7 @@ export default function Contacto() {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="h-12 rounded-xl bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20"
+                      className="h-12 rounded-xl bg-white border border-slate-200 focus:border-primary/50 focus:ring-primary/20 text-slate-800"
                       required
                     />
                   </div>
@@ -182,7 +182,7 @@ export default function Contacto() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="h-12 rounded-xl bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20"
+                      className="h-12 rounded-xl bg-white border border-slate-200 focus:border-primary/50 focus:ring-primary/20 text-slate-800"
                       required
                     />
                   </div>
@@ -199,7 +199,7 @@ export default function Contacto() {
                     onChange={(e) =>
                       setFormData({ ...formData, subject: e.target.value })
                     }
-                    className="h-12 rounded-xl bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20"
+                    className="h-12 rounded-xl bg-white border border-slate-200 focus:border-primary/50 focus:ring-primary/20 text-slate-800"
                     required
                   />
                 </div>
@@ -216,7 +216,7 @@ export default function Contacto() {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="rounded-xl bg-white/5 border-white/10 focus:border-primary/50 focus:ring-primary/20 resize-none"
+                    className="rounded-xl bg-white border border-slate-200 focus:border-primary/50 focus:ring-primary/20 text-slate-800 resize-none"
                     required
                   />
                 </div>

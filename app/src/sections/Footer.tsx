@@ -3,7 +3,7 @@ import { Instagram, Twitter, Facebook, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative pt-20 pb-8 border-t border-white/5">
+    <footer className="relative pt-20 pb-8 border-t border-slate-200 bg-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
@@ -74,20 +74,20 @@ export default function Footer() {
               <a
                 href="https://instagram.com/concejomunicipalmaneiro1"
                 target="_blank"
-                className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all"
+                className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
               >
                 <Instagram className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all"
+                className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
               >
                 <Twitter className="w-5 h-5" />
               </a>
               <a
                 href="https://facebook.com"
                 target="_blank"
-                className="w-11 h-11 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all"
+                className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -96,7 +96,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
             Concejo Municipal de Maneiro &copy; 2026. Todos los derechos reservados.
           </p>

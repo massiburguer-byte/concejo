@@ -49,7 +49,7 @@ export default function Eventos() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="eventos" className="relative py-24 sm:py-32 bg-navy-900/50">
+    <section id="eventos" className="relative py-24 sm:py-32 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ export default function Eventos() {
           >
             Próximamente
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
             Agenda Legislativa
           </h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
@@ -80,7 +80,7 @@ export default function Eventos() {
           className="relative"
         >
           {/* Timeline line */}
-          <div className="absolute left-8 sm:left-12 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
+          <div className="absolute left-8 sm:left-12 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-slate-200 to-transparent" />
 
           <div className="flex flex-col gap-8">
             {eventos.map((e, i) => (
@@ -90,8 +90,8 @@ export default function Eventos() {
                 className="group relative flex gap-6 sm:gap-12"
               >
                 {/* Date bubble */}
-                <div className="relative z-10 flex-shrink-0 w-20 h-20 rounded-3xl flex flex-col items-center justify-center bg-navy-900 border border-white/5 group-hover:border-primary/50 transition-all duration-500 shadow-2xl group-hover:shadow-glow group-hover:-translate-y-1">
-                  <span className="text-3xl font-black leading-none text-white mb-1">
+                <div className="relative z-10 flex-shrink-0 w-20 h-20 rounded-3xl flex flex-col items-center justify-center bg-white border border-slate-200 group-hover:border-primary/50 transition-all duration-500 shadow-sm group-hover:shadow-glow group-hover:-translate-y-1">
+                  <span className="text-3xl font-black leading-none text-slate-800 mb-1">
                     {e.day}
                   </span>
                   <span className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-primary">
@@ -102,7 +102,7 @@ export default function Eventos() {
                 {/* Card */}
                 <div className="flex-1 glass-card rounded-[2.5rem] p-8 group-hover:-translate-y-1 transition-all duration-500">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-                    <h3 className="text-xl font-black text-white group-hover:text-primary transition-colors tracking-tight leading-none">
+                    <h3 className="text-xl font-black text-slate-800 group-hover:text-primary transition-colors tracking-tight leading-none">
                       {e.title}
                     </h3>
                     <span
@@ -116,16 +116,16 @@ export default function Eventos() {
                     </span>
                   </div>
 
-                  <p className="text-xs text-white/50 mb-8 leading-relaxed max-w-xl group-hover:text-white/70 transition-colors">
+                  <p className="text-xs text-muted-foreground mb-8 leading-relaxed max-w-xl group-hover:text-foreground/85 transition-colors">
                     {e.description}
                   </p>
 
                   <div className="flex flex-wrap items-center gap-6">
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-[0.65rem] font-bold text-white/60">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200/60 text-[0.65rem] font-bold text-slate-600">
                       <Clock className="w-3.5 h-3.5 text-primary" />
                       {e.time}
                     </div>
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-[0.65rem] font-bold text-white/60">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 border border-slate-200/60 text-[0.65rem] font-bold text-slate-600">
                       <MapPin className="w-3.5 h-3.5 text-primary" />
                       {e.location}
                     </div>

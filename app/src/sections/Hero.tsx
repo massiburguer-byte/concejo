@@ -16,11 +16,11 @@ const slides = [
   {
     image: "/images/2.png",
     badge: "Periodo 2025 - 2029",
-    title: <>Cuerpo Legislativo <span className="text-primary">Comprometido</span></>,
-    description: "Conoce a los concejales que trabajan día a día por el bienestar y desarrollo de nuestro municipio ejemplar.",
+    title: "",
+    description: "",
     primaryBtn: { text: "Ver Concejales", href: "#concejales" },
-    position: "items-end pb-20", // Abajo para no tapar caras
-    imgPos: "object-right" // Mover imagen a la derecha para dar espacio al texto
+    position: "items-end pb-12", // Abajo para no tapar caras
+    imgPos: "object-right" // Mover imagen a la derecha para dar espacio
   },
   {
     image: "/images/3.png",
@@ -73,7 +73,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative h-[80vh] w-full flex items-center overflow-hidden bg-navy-950"
+      className="relative h-[80vh] w-full flex items-center overflow-hidden bg-background"
     >
       {/* Background Slider */}
       <div className="absolute inset-0 z-0">
@@ -89,11 +89,11 @@ export default function Hero() {
             <img
               src={slides[currentSlide].image}
               alt="Hero Background"
-              className="w-full h-full object-cover object-center scale-105"
+              className={`w-full h-full object-contain scale-100 ${slides[currentSlide].imgPos || "object-center"}`}
             />
             {/* Overlay Gradients */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-navy-950 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/30 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f3f7fa] z-10" />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -115,19 +115,23 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-[0.95] mb-8 text-white drop-shadow-2xl"
-            >
-              {slides[currentSlide].title}
-            </motion.h1>
+            {slides[currentSlide].title && (
+              <motion.h1
+                variants={itemVariants}
+                className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-[0.95] mb-8 text-white drop-shadow-2xl"
+              >
+                {slides[currentSlide].title}
+              </motion.h1>
+            )}
 
-            <motion.p
-              variants={itemVariants}
-              className="text-base sm:text-lg text-white/80 max-w-lg mb-10 leading-relaxed drop-shadow-lg"
-            >
-              {slides[currentSlide].description}
-            </motion.p>
+            {slides[currentSlide].description && (
+              <motion.p
+                variants={itemVariants}
+                className="text-base sm:text-lg text-white/80 max-w-lg mb-10 leading-relaxed drop-shadow-lg"
+              >
+                {slides[currentSlide].description}
+              </motion.p>
+            )}
 
             <motion.div
               variants={itemVariants}
