@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, MessageSquare, Send, Phone, MapPin, CheckCircle2 } from "lucide-react";
+import generalSettings from "../data/settings/general.json";
 
 export default function Contacto() {
   const [submitted, setSubmitted] = useState(false);
@@ -66,7 +67,7 @@ export default function Contacto() {
 
               <div className="flex flex-col gap-8">
                 <a
-                  href="mailto:info@concejomaneiro.gob.ve"
+                  href={`mailto:${generalSettings.email}`}
                   className="flex items-start gap-5 group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:shadow-glow transition-all duration-500 flex-shrink-0">
@@ -75,7 +76,7 @@ export default function Contacto() {
                   <div>
                     <p className="text-[0.65rem] font-black uppercase tracking-widest text-primary mb-1">Correo Electrónico</p>
                     <p className="text-lg font-bold text-slate-700 group-hover:text-primary transition-colors">
-                      info@concejomaneiro.gob.ve
+                      {generalSettings.email}
                     </p>
                   </div>
                 </a>
@@ -87,7 +88,7 @@ export default function Contacto() {
                   <div>
                     <p className="text-[0.65rem] font-black uppercase tracking-widest text-primary mb-1">Central Telefónica</p>
                     <p className="text-lg font-bold text-slate-700">
-                      +58 (295) 555-0100
+                      {generalSettings.phone}
                     </p>
                   </div>
                 </div>
@@ -99,7 +100,7 @@ export default function Contacto() {
                   <div>
                     <p className="text-[0.65rem] font-black uppercase tracking-widest text-primary mb-1">Sede Administrativa</p>
                     <p className="text-base font-bold text-slate-700 leading-relaxed">
-                      Av. Bolívar, Edificio Concejo Municipal, Pampatar, Municipio Maneiro, Nueva Esparta.
+                      {generalSettings.address}
                     </p>
                   </div>
                 </div>

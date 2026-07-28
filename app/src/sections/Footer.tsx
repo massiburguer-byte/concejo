@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Instagram, Twitter, Facebook, Heart } from "lucide-react";
+import generalSettings from "../data/settings/general.json";
 
 export default function Footer() {
   return (
@@ -71,26 +72,33 @@ export default function Footer() {
               Síguenos
             </h4>
             <div className="flex items-center gap-3">
-              <a
-                href="https://instagram.com/concejomunicipalmaneiro1"
-                target="_blank"
-                className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
+              {generalSettings.instagram && (
+                <a
+                  href={generalSettings.instagram}
+                  target="_blank"
+                  className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {generalSettings.twitter && (
+                <a
+                  href={generalSettings.twitter}
+                  target="_blank"
+                  className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
+                >
+                  <Twitter className="w-5 h-5" />
+                </a>
+              )}
+              {generalSettings.facebook && (
+                <a
+                  href={generalSettings.facebook}
+                  target="_blank"
+                  className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-primary hover:border-primary hover:text-white transition-all shadow-sm"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
             </div>
           </motion.div>
         </div>

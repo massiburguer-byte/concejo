@@ -3,45 +3,16 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
-const concejales = [
-  {
-    name: "Carolina Guerra",
-    role: "Presidenta",
-    image: "/images/concejales/carolina.png",
-    description: "Liderando con visión estratégica para el futuro de Maneiro.",
-    large: true,
-  },
-  {
-    name: "Eulys Cedeño",
-    role: "1ra Vicepresidenta",
-    image: "/images/concejales/eulys.png",
-  },
-  {
-    name: "José Gregorio Marcano",
-    role: "2do Vicepresidente",
-    image: "/images/concejales/gregorio.png",
-  },
-  {
-    name: "Haroldo Rojas",
-    role: "Concejal",
-    image: "/images/concejales/harolds.png",
-  },
-  {
-    name: "Asdrúbal Delgado",
-    role: "Concejal",
-    image: "/images/concejales/asdrubal.png",
-  },
-  {
-    name: "Gilberto Rojas",
-    role: "Concejal",
-    image: "/images/concejales/gilberto.png",
-  },
-  {
-    name: "Ana Gonzalez",
-    role: "Concejal",
-    image: "/images/concejales/ana-gonzalez.png",
-  },
-];
+const modules = import.meta.glob('../data/concejales/*.json', { eager: true });
+const concejalesRaw = Object.values(modules).map((m: any) => m.default);
+
+// Sort by order, fallback to name
+const concejales = concejalesRaw.sort((a, b) => {
+  if (a.order !== undefined && b.order !== undefined) {
+    return a.order - b.order;
+  }
+  return a.name.localeCompare(b.name);
+});
 
 const containerVariants = {
   hidden: { opacity: 0 },

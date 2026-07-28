@@ -35,72 +35,20 @@ interface Ordinance {
   description: string;
 }
 
-const ordenanzasData: Record<string, Ordinance[]> = {
-  "2025": [
-    { name: "Adulto Mayor", file: "ADULTO MAYOR.pdf", category: "social", gaceta: "Gaceta Nro. 1990", description: "Protección ciudadana e inclusión integral para adultos mayores." },
-    { name: "Convivencia Vial 1986", file: "CONVIVENCIA VIAL 1986.pdf", category: "seguridad", gaceta: "Gaceta Nro. 1986", description: "Normativa histórica sobre tránsito y convivencia vial." },
-    { name: "Creación y Condecoración Orden Médico Ejemplar", file: "CREACION Y CONDECORACION ORDEN MEDICO EJEMPLAR.pdf", category: "social", gaceta: "Gaceta Nro. 1883", description: "Creación y otorgamiento de la distinción en honor al mérito del personal médico del municipio." },
-    { name: "Economía Plateada", file: "ECONOMIA PLATEADA.pdf", category: "social", gaceta: "Gaceta Nro. 1985", description: "Incentivos y participación económica para las personas mayores." },
-    { name: "Instituto Municipal de la Mujer (IMMUJER)", file: "IMMUJER.pdf", category: "social", gaceta: "Gaceta Nro. 4.222", description: "Creación y regulación del Instituto Municipal de la Mujer." },
-    { name: "Impuesto sobre Inmuebles Urbanos", file: "IMPUESTO SOBRE INMUEBLES URBANOS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1863", description: "Regulación tributaria y catastral sobre la propiedad inmobiliaria urbana en Maneiro." },
-    { name: "Instituto Municipal de Turismo (IMTURM)", file: "IMTURM.pdf", category: "urbano", gaceta: "Gaceta Nro. 1972", description: "Regulación de actividades turísticas e institución encargada de su promoción." },
-    { name: "Orden Ing. José Luis Bruzual", file: "ORDEN ING JOSE LUIS BRUZUAL.pdf", category: "social", gaceta: "Gaceta Nro. 1991", description: "Creación de la distinción honorífica al mérito en ingeniería civil y urbana." },
-    { name: "Plan Especial de Desarrollo Urbano Av. Aldonza Manrique", file: "PROYECTO ESPECIAL DE DESARROLLO URBANO AV ALDONZA MANRIQUE.pdf", category: "urbano", gaceta: "Gaceta Nro. 4.212", description: "Lineamientos urbanísticos para el crecimiento sostenible de la Avenida Aldonza Manrique." },
-  ],
-  "2024": [
-    { name: "Impuesto sobre Actividades Económicas", file: "ORD 1745(VIGENTE Mar-24).pdf", category: "hacienda", gaceta: "Gaceta Nro. 1745", description: "Regulación de tributos aplicables al ejercicio de actividades comerciales e industriales." },
-    { name: "Impuesto sobre Juegos y Apuestas Lícitas", file: "ORD 1746AL ABRIL 2024.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1746", description: "Normativa y alícuotas tributarias para actividades lúdicas autorizadas en el municipio." },
-    { name: "Tasas por Uso de Espacios Públicos y Servicios Administrativos (Reforma Abril 2024)", file: "ORD_OTA ESPACIOS PUBLICOS ABRIL 2024.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1748", description: "Actualización de tarifas administrativas y derechos de concesión de espacios públicos." },
-    { name: "Emprendimientos y su Régimen Simplificado", file: "ORD_EMPRENDIMIENTO ABRIL 2024.pdf", category: "social", gaceta: "Gaceta Nro. 1749", description: "Estímulos fiscales y simplificación de trámites para nuevos emprendedores locales." },
-    { name: "Impuesto sobre Propaganda y Publicidad Comercial", file: "ORD_GME 1668 OPPC (VIGENTE 2024).pdf", category: "hacienda", gaceta: "Gaceta Nro. 1782", description: "Tributos aplicables a la difusión publicitaria en el espacio público del municipio." },
-    { name: "Impuesto sobre Espectáculos Públicos", file: "ORD_GME 1669 OEP (VIGENTE 2024).pdf", category: "hacienda", gaceta: "Gaceta Nro. 1781", description: "Tributación por la realización de eventos de entretenimiento y shows públicos." },
-    { name: "Registro y Autorización para el Expendio de Bebidas y Especies Alcohólicas", file: "ORD_GME 1670 OEBA (VIGENTE 2024).pdf", category: "hacienda", gaceta: "Gaceta Nro. 1670", description: "Control de licencias y autorizaciones comerciales para el sector de licores." },
-    { name: "Tasas por Uso de Espacios Públicos y Servicios Administrativos (Noviembre 2023)", file: "ORD_GME 1671 OTA (VIGENTE 2024).pdf", category: "hacienda", gaceta: "Gaceta Nro. 1671", description: "Tabulador de tasas administrativas y trámites municipales de fin de año." },
-    { name: "Impuesto sobre Vehículos", file: "ORD_GME 1672 OIVH (VIGENTE 2024).pdf", category: "hacienda", gaceta: "Gaceta Nro. 1672", description: "Tasa impositiva anual aplicable a los propietarios de vehículos registrados en Maneiro." }
-  ],
-  "2023": [
-    { name: "Expendio de Bebidas y Especies Alcohólicas", file: "EXPEDIO DE BEBIDAS Y ESPECIES ALCOHOLICAS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1670", description: "Normativa de comercialización y horarios de venta de especies alcohólicas." },
-    { name: "Honor a la Cultura Jesús Ávila", file: "HONOR A LA CULTURA JESUS AVILA.pdf", category: "social", gaceta: "Gaceta Nro. 1629", description: "Creación del galardón municipal en honor a la música popular y folclórica de la región." },
-    { name: "Impuesto sobre Vehículos", file: "IMPUESTO SOBRE VEHICULOS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1655", description: "Regulación impositiva de patentes vehiculares correspondiente al ejercicio fiscal 2023." },
-    { name: "Orden Lech Naleska", file: "ORDEN LECH NALESKA.pdf", category: "social", gaceta: "Gaceta Nro. 1581", description: "Otorgamiento del reconocimiento municipal para líderes comunitarios destacados." },
-    { name: "Servicio de Aseo Urbano, Rural y Domiciliario", file: "SERVICIO DE ASEO URBANO,RURAL Y DOMICILIARIO.pdf", category: "urbano", gaceta: "Gaceta Nro. 1679", description: "Regulación del sistema de recolección y tratamiento de desechos sólidos municipales." },
-  ],
-  "2022": [
-    { name: "Poda, Tala, Repoblación y Trasplante de Árboles", file: "PODA,TALA,REPOBLACION Y TRANSPLANTE DE ARBOLES.pdf", category: "urbano", gaceta: "Gaceta Nro. 1414", description: "Normativa ambiental de manejo forestal urbano y áreas verdes en Los Robles y Pampatar." },
-    { name: "Presupuesto Anual de Ingresos y Gastos 2022", file: "PRESUPUESTO ANUEL DE INGRESO Y GASTOS 2022..pdf", category: "hacienda", gaceta: "Gaceta Nro. 1436", description: "Aprobación de la asignación presupuestaria para el desarrollo del municipio en 2022." },
-  ],
-  "2021": [
-    { name: "Creación del Servicio de Administración Tributaria SEDEMADRI", file: "CREACION DEL SERVICIO DE ADMINISTRACION TRIBUTARIA SEDEMADRI.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1392", description: "Estructura organizacional y base jurídica para el nuevo organismo recaudador municipal." },
-    { name: "Inclusión a la Primera Experiencia Laboral de la Juventud", file: "INCLUSION A LA PRIMERA EXPERIENCIA LABORAL DE LA JUVENTUD.pdf", category: "social", gaceta: "Gaceta Nro. 1291", description: "Programa de incentivos a empresas locales para la inserción laboral de jóvenes profesionales." },
-    { name: "Régimen Parlamentario del Municipio Maneiro", file: "REGIMEN PARLAMENTARIO DEL MUNICIPIO MANEIRO.pdf", category: "social", gaceta: "Gaceta Nro. 1304", description: "Reglamento interno de funcionamiento del Concejo Municipal de Maneiro." },
-    { name: "Revisión y Recargos de Multas e Impuestos", file: "REVISION Y RECARGOS DE MULTAS E IMPUESTOS DE ACTIVIDADES ECONOMICAS DE INDUSTRIA.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1306", description: "Tabulación y actualización de recargos por mora fiscal industrial y comercial." },
-  ],
-  "2020": [
-    { name: "Actividades Económicas", file: "ACTIVIDADES ECONOMICAS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1127", description: "Normativa fiscal básica para el ejercicio comercial en el periodo de contingencia nacional." },
-    { name: "Creación del Instituto de Deporte", file: "CREACION DE INSTITUTO DE DEPORTE.pdf", category: "social", gaceta: "Gaceta Nro. 1240", description: "Base jurídica y estructura operativa para el fomento deportivo de la juventud." },
-    { name: "Creación de la Ordenanza de la Unidad de Cálculo Municipal", file: "CREACION DE LA ORDENANZA DE LA UNIDAD DE CALCULO MUNICIPAL.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1196", description: "Establecimiento del valor referencial de cálculo impositivo para trámites y multas locales." },
-    { name: "Registro Único de Contribuyentes", file: "REGISTRO UNICO DE CONTRIBUYENTES.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1202", description: "Creación del censo tributario obligatorio de comercios y contribuyentes." },
-    { name: "Solvencia Única Tributaria", file: "SOLVENCIA UNICA TRIBUTARIA.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1123", description: "Regulación de requisitos y emisión del certificado de solvencia fiscal municipal." }
-  ],
-  "2019": [
-    { name: "Creación y Publicación de la Ordenanza de Cálculo Municipal", file: "CREACION Y PUBLICACION DE LA ORDENANZA DE CALCULO MUNICIPAL.pdf", category: "hacienda", gaceta: "Gaceta Nro. 1.050", description: "Primera publicación del marco regulatorio de unidades impositivas y multas de Maneiro." },
-    { name: "Reforma de la Creación de SEDEMATRI", file: "REF. CREACION DE SERVICIO DECONCENTRADO DE ADM TRIBUTARIA (SEDEMATRI).pdf", category: "hacienda", gaceta: "Gaceta Nro. 979", description: "Adecuación estructural de las funciones y competencias tributarias y recaudadoras." }
-  ],
-  "2018": [
-    { name: "Bienes Municipales", file: "BIENES MUNICIPALES PDF.pdf", category: "hacienda", gaceta: "Gaceta Nro. 817", description: "Normas de registro, control, resguardo y avalúo del patrimonio municipal de Maneiro." },
-    { name: "Comercio Informal", file: "COMERCIO INFORMAL.pdf", category: "urbano", gaceta: "Gaceta Nro. 911", description: "Regulación y censo del comercio informal en espacios urbanos públicos de Pampatar." },
-    { name: "Contribuciones Especiales por Plusvalías", file: "CONTRIBUCIONES ESPECIALES POR PLUSVALIAS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 814", description: "Tributación aplicable al incremento de valor de los inmuebles derivado de obras públicas." },
-    { name: "Creación de SEDEMATRI", file: "CREACION DE SEDEMATRI.pdf", category: "hacienda", gaceta: "Gaceta Nro. 812", description: "Decreto primario de creación de la administración tributaria del municipio." },
-    { name: "Servicio Desconcentrado Municipal de Adm. Tributaria", file: "CREACION DEL SERICIO DESCONCENTRADO MUNICIPAL DE ADM TRIBUTARIA.pdf", category: "hacienda", gaceta: "Gaceta Nro. 908", description: "Definición y estructura legal del funcionamiento institucional de SEDEMATRI." },
-    { name: "Impuesto sobre Actividades Económicas", file: "IMPUESTO SOBRE ACTIVIDADES ECONOMICAS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 909", description: "Tabulador impositivo básico comercial, industrial y de servicios del municipio." },
-    { name: "Incumplimiento por Aparcamiento de Vehículo", file: "INCUMPLIMIENTO  POR APARCAMIENTO DE VEHICULO.pdf", category: "seguridad", gaceta: "Gaceta Nro. 805", description: "Reglamento vial de sanciones y multas aplicables a vehículos mal estacionados." },
-    { name: "Plan Especial de Desarrollo Urbano Av. Aldonza Manrique", file: "PLAN ESPECIAL DE DESARROLLO URBANO AV ALDONZA MANRIQUE.pdf", category: "urbano", gaceta: "Gaceta Nro. 808", description: "Fijación de retiros, densidad y zonificación de la Av. Aldonza Manrique." },
-    { name: "Procedimientos Tributarios", file: "PROCEDIMIENTOS TRIBUTARIOS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 815", description: "Establecimiento de las pautas jurídicas y administrativas para reclamos y fiscalización." },
-    { name: "Procedimientos y Requisitos para Funcionarios de SEDEMATRI", file: "PROCEDIMIENTOS Y REQUISITOS PARA DETERMINACION D EPAGOS A FUNCIONARIOS ADSCRITOS A SEDEMATRI.pdf", category: "hacienda", gaceta: "Gaceta Nro. 910", description: "Estatuto administrativo y de remuneraciones del personal adscrito a SEDEMATRI." },
-    { name: "Protección Ciudadana a los Adultos Mayores", file: "PROTECCION CIUDADANA A LOS ADULTOS MAYORES.pdf", category: "social", gaceta: "Gaceta Nro. 827", description: "Programa de asistencia integral y defensa de derechos de los adultos mayores de Maneiro." },
-    { name: "Uso de Plazas Públicas", file: "USO DE PLAZAS PUBLICAS.pdf", category: "urbano", gaceta: "Gaceta Nro. 806", description: "Reglas de convivencia y otorgamiento de permisos para actividades colectivas." }
-  ],
-};
+const modules = import.meta.glob('../data/ordenanzas/*.json', { eager: true });
+const ordenanzasDataRaw = Object.values(modules).map((m: any) => m.default as Ordinance & { year?: string });
+
+const ordenanzasData = ordenanzasDataRaw.reduce((acc: Record<string, Ordinance[]>, doc: Ordinance & { year?: string }) => {
+  const year = doc.year || "2024";
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(doc);
+  return acc;
+}, {} as Record<string, Ordinance[]>);
+
+// Ordenar las ordenanzas por nombre dentro de cada año
+Object.keys(ordenanzasData).forEach(year => {
+  ordenanzasData[year].sort((a: Ordinance, b: Ordinance) => a.name.localeCompare(b.name));
+});
 
 export default function Ordenanzas() {
   const [selectedYear, setSelectedYear] = useState("all");
@@ -115,16 +63,16 @@ export default function Ordenanzas() {
   }, [search, selectedCategory, selectedYear]);
 
   // Dynamic filter query
-  const filteredDocs = Object.entries(ordenanzasData).flatMap(([year, docs]) =>
+  const filteredDocs = Object.entries(ordenanzasData).flatMap(([year, docs]: [string, Ordinance[]]) =>
     docs
-      .filter((doc) => {
+      .filter((doc: Ordinance) => {
         const matchesSearch = doc.name.toLowerCase().includes(search.toLowerCase()) || 
                              doc.description.toLowerCase().includes(search.toLowerCase());
         const matchesCategory = selectedCategory === "all" || doc.category === selectedCategory;
         const matchesYear = selectedYear === "all" || year === selectedYear;
         return matchesSearch && matchesCategory && matchesYear;
       })
-      .map((doc) => ({ ...doc, year }))
+      .map((doc: Ordinance) => ({ ...doc, year }))
   );
 
   const ITEMS_PER_PAGE = 4;

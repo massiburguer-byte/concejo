@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Instagram, Facebook, ExternalLink, Heart, MessageCircle } from "lucide-react";
+import generalSettings from "../data/settings/general.json";
 
 const mockInstaPosts = [
   { id: 1, image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=500&auto=format&fit=crop", likes: "124", comments: "12" },
@@ -52,11 +53,13 @@ export default function RedesSociales() {
                 </div>
                 <div>
                   <h3 className="text-xl font-black text-slate-800 tracking-tight">Instagram</h3>
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">@concejomunicipalmaneiro1</p>
+                  <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">
+                    {generalSettings.instagram ? `@${generalSettings.instagram.split('/').pop()}` : '@concejomunicipalmaneiro1'}
+                  </p>
                 </div>
               </div>
               <a 
-                href="https://instagram.com/concejomunicipalmaneiro1" 
+                href={generalSettings.instagram || "https://instagram.com/concejomunicipalmaneiro1"} 
                 target="_blank" 
                 className="px-6 py-2 rounded-xl bg-white border border-slate-200 text-[0.65rem] font-black uppercase tracking-widest text-slate-700 hover:bg-primary hover:text-white transition-all duration-300 shadow-sm"
               >
@@ -99,7 +102,7 @@ export default function RedesSociales() {
                 </div>
               </div>
               <a 
-                href="https://facebook.com" 
+                href={generalSettings.facebook || "https://facebook.com"} 
                 target="_blank" 
                 className="px-6 py-2 rounded-xl bg-white border border-slate-200 text-[0.65rem] font-black uppercase tracking-widest text-slate-700 hover:bg-[#1877F2] hover:text-white transition-all duration-300 shadow-sm"
               >

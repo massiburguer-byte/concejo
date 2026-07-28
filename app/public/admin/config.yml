@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "app/public/images/noticias"
-public_folder: "/images/noticias"
+media_folder: "app/public/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "noticias"
@@ -19,3 +19,46 @@ collections:
       - {label: "Extracto", name: "excerpt", widget: "text"}
       - {label: "Categoría", name: "category", widget: "string"}
       - {label: "Contenido Completo", name: "content", widget: "markdown", required: false}
+
+  - name: "ordenanzas"
+    label: "Ordenanzas Municipales"
+    folder: "app/src/data/ordenanzas"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    format: "json"
+    fields:
+      - {label: "Nombre de la Ordenanza", name: "name", widget: "string"}
+      - {label: "Archivo PDF", name: "file", widget: "file"}
+      - {label: "Categoría", name: "category", widget: "select", options: ["hacienda", "urbano", "seguridad", "social"]}
+      - {label: "Número de Gaceta", name: "gaceta", widget: "string"}
+      - {label: "Año", name: "year", widget: "string"}
+      - {label: "Descripción", name: "description", widget: "text"}
+
+  - name: "concejales"
+    label: "Cuerpo Legislativo"
+    folder: "app/src/data/concejales"
+    create: true
+    slug: "{{slug}}"
+    format: "json"
+    fields:
+      - {label: "Nombre", name: "name", widget: "string"}
+      - {label: "Cargo", name: "role", widget: "string"}
+      - {label: "Foto", name: "image", widget: "image"}
+      - {label: "Descripción", name: "description", widget: "text", required: false}
+      - {label: "Es Principal (Grande)", name: "large", widget: "boolean", required: false, default: false}
+      - {label: "Orden", name: "order", widget: "number", required: false, value_type: "int"}
+
+  - name: "settings"
+    label: "Configuración General"
+    files:
+      - label: "Datos de Contacto y Redes"
+        name: "general"
+        file: "app/src/data/settings/general.json"
+        format: "json"
+        fields:
+          - {label: "Teléfono", name: "phone", widget: "string", required: false}
+          - {label: "Correo Electrónico", name: "email", widget: "string", required: false}
+          - {label: "Dirección", name: "address", widget: "text", required: false}
+          - {label: "Facebook URL", name: "facebook", widget: "string", required: false}
+          - {label: "Instagram URL", name: "instagram", widget: "string", required: false}
+          - {label: "Twitter URL (X)", name: "twitter", widget: "string", required: false}
