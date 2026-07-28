@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import ReactMarkdown from "react-markdown";
 
 const modules = import.meta.glob('../data/noticias/*.json', { eager: true });
 const noticias = Object.keys(modules)
@@ -12,6 +14,7 @@ const noticias = Object.keys(modules)
 
 export default function Noticias() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedNoticia, setSelectedNoticia] = useState<any>(null);
 
   const next = () => {
     setCurrentIndex((prev) => (prev + 1) % noticias.length);
@@ -71,7 +74,8 @@ export default function Noticias() {
             {noticias.map((n, i) => (
               <motion.article
                 key={i}
-                className="min-w-full md:min-w-[calc(33.333%-1rem)] group relative rounded-[2.5rem] overflow-hidden glass-card"
+                className="min-w-full md:min-w-[calc(33.333%-1rem)] group relative rounded-[2.5rem] overflow-hidden glass-card cursor-pointer"
+                onClick={() => setSelectedNoticia(n)}
               >
                 <div className="relative h-60 overflow-hidden">
                   <img
@@ -114,7 +118,6 @@ export default function Noticias() {
           </motion.div>
         </div>
 
-        {/* Dots */}
         <div className="flex justify-center gap-2 mt-10">
           {noticias.map((_, i) => (
             <button
@@ -127,6 +130,47 @@ export default function Noticias() {
           ))}
         </div>
       </div>
+
+      <Dialog open={!!selectedNoticia} onOpenChange={(open) => !open && setSelectedNoticia(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white rounded-[2.5rem] border-0 shadow-2xl h-[90vh] md:h-auto md:max-h-[90vh] flex flex-col">
+          {selectedNoticia && (
+            <>
+              <div className="relative h-64 md:h-80 shrink-0">
+                <img
+                  src={selectedNoticia.image}
+                  alt={selectedNoticia.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-10 md:right-10 z-20 text-white">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 rounded-full text-[0.65rem] font-black uppercase tracking-widest bg-primary text-white">
+                      {selectedNoticia.category}
+                    </span>
+                    <div className="flex items-center gap-1.5 text-[0.7rem] font-semibold text-white/90">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {selectedNoticia.date}
+                    </div>
+                  </div>
+                  <DialogTitle className="text-2xl md:text-3xl lg:text-4xl font-black leading-tight">
+                    {selectedNoticia.title}
+                  </DialogTitle>
+                  <DialogDescription className="hidden" />
+                </div>
+              </div>
+              <div className="p-6 md:p-10 overflow-y-auto shrink-1 bg-white">
+                <article className="prose prose-slate md:prose-lg max-w-none text-slate-700 marker:text-primary prose-headings:font-black prose-headings:text-slate-900 prose-a:text-primary prose-a:font-bold hover:prose-a:text-primary/80 prose-img:rounded-2xl">
+                  {selectedNoticia.content ? (
+                    <ReactMarkdown>{selectedNoticia.content}</ReactMarkdown>
+                  ) : (
+                    <p>{selectedNoticia.excerpt}</p>
+                  )}
+                </article>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
