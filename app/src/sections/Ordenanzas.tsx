@@ -37,14 +37,14 @@ interface Ordinance {
 
 const ordenanzasData: Record<string, Ordinance[]> = {
   "2025": [
-    { name: "Adulto Mayor", file: "ADULTO MAYOR.pdf", category: "social", gaceta: "Gaceta Nro. 4.225", description: "Protección ciudadana e inclusión integral para adultos mayores." },
-    { name: "Convivencia Vial 1986", file: "CONVIVENCIA VIAL 1986.pdf", category: "seguridad", gaceta: "Gaceta Nro. 4.224", description: "Normativa histórica sobre tránsito y convivencia vial." },
-    { name: "Creación y Condecoración Orden Médico Ejemplar", file: "CREACION Y CONDECORACION ORDEN MEDICO EJEMPLAR.pdf", category: "social", gaceta: "Gaceta Nro. 4.218", description: "Creación y otorgamiento de la distinción en honor al mérito del personal médico del municipio." },
-    { name: "Economía Plateada", file: "ECONOMIA PLATEADA.pdf", category: "social", gaceta: "Gaceta Nro. 4.223", description: "Incentivos y participación económica para las personas mayores." },
+    { name: "Adulto Mayor", file: "ADULTO MAYOR.pdf", category: "social", gaceta: "Gaceta Nro. 1990", description: "Protección ciudadana e inclusión integral para adultos mayores." },
+    { name: "Convivencia Vial 1986", file: "CONVIVENCIA VIAL 1986.pdf", category: "seguridad", gaceta: "Gaceta Nro. 1986", description: "Normativa histórica sobre tránsito y convivencia vial." },
+    { name: "Creación y Condecoración Orden Médico Ejemplar", file: "CREACION Y CONDECORACION ORDEN MEDICO EJEMPLAR.pdf", category: "social", gaceta: "Gaceta Nro. 1883", description: "Creación y otorgamiento de la distinción en honor al mérito del personal médico del municipio." },
+    { name: "Economía Plateada", file: "ECONOMIA PLATEADA.pdf", category: "social", gaceta: "Gaceta Nro. 1985", description: "Incentivos y participación económica para las personas mayores." },
     { name: "Instituto Municipal de la Mujer (IMMUJER)", file: "IMMUJER.pdf", category: "social", gaceta: "Gaceta Nro. 4.222", description: "Creación y regulación del Instituto Municipal de la Mujer." },
     { name: "Impuesto sobre Inmuebles Urbanos", file: "IMPUESTO SOBRE INMUEBLES URBANOS.pdf", category: "hacienda", gaceta: "Gaceta Nro. 4.215", description: "Regulación tributaria y catastral sobre la propiedad inmobiliaria urbana en Maneiro." },
-    { name: "Instituto Municipal de Turismo (IMTURM)", file: "IMTURM.pdf", category: "urbano", gaceta: "Gaceta Nro. 4.221", description: "Regulación de actividades turísticas e institución encargada de su promoción." },
-    { name: "Orden Ing. José Luis Bruzual", file: "ORDEN ING JOSE LUIS BRUZUAL.pdf", category: "social", gaceta: "Gaceta Nro. 4.220", description: "Creación de la distinción honorífica al mérito en ingeniería civil y urbana." },
+    { name: "Instituto Municipal de Turismo (IMTURM)", file: "IMTURM.pdf", category: "urbano", gaceta: "Gaceta Nro. 1972", description: "Regulación de actividades turísticas e institución encargada de su promoción." },
+    { name: "Orden Ing. José Luis Bruzual", file: "ORDEN ING JOSE LUIS BRUZUAL.pdf", category: "social", gaceta: "Gaceta Nro. 1991", description: "Creación de la distinción honorífica al mérito en ingeniería civil y urbana." },
     { name: "Plan Especial de Desarrollo Urbano Av. Aldonza Manrique", file: "PROYECTO ESPECIAL DE DESARROLLO URBANO AV ALDONZA MANRIQUE.pdf", category: "urbano", gaceta: "Gaceta Nro. 4.212", description: "Lineamientos urbanísticos para el crecimiento sostenible de la Avenida Aldonza Manrique." },
   ],
   "2024": [
