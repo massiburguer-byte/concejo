@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Download, Search, X, CheckCircle2, ChevronRight, ChevronLeft, ExternalLink } from "lucide-react";
+import { Download, Search, X, CheckCircle2, ChevronRight, ChevronLeft, ExternalLink, Eye, FileText } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 const years = ["2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018"];
 
@@ -33,6 +34,25 @@ interface Ordinance {
   category: string;
   gaceta: string;
   description: string;
+  year?: string;
+}
+
+export function getOrdinanceUrl(file: string, year?: string): string {
+  if (!file) return "#";
+  const trimmed = file.trim();
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    return trimmed;
+  }
+  // Si ya comienza con / o contiene la ruta completa /docs/...
+  if (trimmed.startsWith("/")) {
+    return encodeURI(trimmed);
+  }
+  if (trimmed.startsWith("docs/")) {
+    return encodeURI(`/${trimmed}`);
+  }
+  // Si solo viene el nombre de archivo (ej. "ORDENANZA.pdf")
+  const yr = year || "2024";
+  return encodeURI(`/docs/ordenanzas/${yr}/${trimmed}`);
 }
 
 const modules = import.meta.glob('../data/ordenanzas/*.json', { eager: true });
@@ -55,12 +75,25 @@ export default function Ordenanzas() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [previewDoc, setPreviewDoc] = useState<any>(null);
 
   const isSearching = search.trim() !== "";
 
   useEffect(() => {
     setCurrentPage(1);
   }, [search, selectedCategory, selectedYear]);
+
+  useEffect(() => {
+    const handleCustomFilter = (e: any) => {
+      if (e.detail?.query !== undefined) {
+        setSearch(e.detail.query);
+        setSelectedCategory("all");
+        setSelectedYear("all");
+      }
+    };
+    window.addEventListener("filter-ordenanza", handleCustomFilter);
+    return () => window.removeEventListener("filter-ordenanza", handleCustomFilter);
+  }, []);
 
   // Dynamic filter query
   const filteredDocs = Object.entries(ordenanzasData).flatMap(([year, docs]: [string, Ordinance[]]) =>
@@ -252,16 +285,25 @@ export default function Ordenanzas() {
                     </p>
                   </div>
 
-                  {/* Right Side: Action Button */}
-                  <a
-                    href={`/docs/ordenanzas/${doc.year}/${doc.file}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="h-12 px-6 rounded-2xl bg-slate-950 hover:bg-primary text-white font-bold text-xs uppercase tracking-wider gap-2 flex items-center justify-center transition-all flex-shrink-0 w-full md:w-auto hover:-translate-y-0.5 active:translate-y-0 shadow-sm"
-                  >
-                    <Download className="w-4 h-4" />
-                    Descargar PDF
-                  </a>
+                  {/* Right Side: Action Buttons */}
+                  <div className="flex items-center gap-2 flex-shrink-0 w-full md:w-auto">
+                    <button
+                      onClick={() => setPreviewDoc(doc)}
+                      className="flex-1 md:flex-none h-11 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs uppercase tracking-wider gap-1.5 flex items-center justify-center transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-2xs"
+                    >
+                      <Eye className="w-4 h-4 text-blue-600" />
+                      <span>Ver</span>
+                    </button>
+                    <a
+                      href={getOrdinanceUrl(doc.file, doc.year)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 md:flex-none h-11 px-5 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs uppercase tracking-wider gap-2 flex items-center justify-center transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Descargar</span>
+                    </a>
+                  </div>
                 </motion.div>
               ))}
 
@@ -323,6 +365,59 @@ export default function Ordenanzas() {
           </div>
         </div>
       </div>
+
+      {/* PDF Quick Preview Modal */}
+      <Dialog open={!!previewDoc} onOpenChange={(open) => !open && setPreviewDoc(null)}>
+        {previewDoc && (
+          <DialogContent className="sm:max-w-4xl max-h-[92vh] h-[85vh] p-0 overflow-hidden bg-white rounded-3xl border border-slate-200 shadow-2xl flex flex-col">
+            {/* Header */}
+            <div className="bg-slate-900 text-white p-4 sm:p-5 flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-3 min-w-0 pr-4">
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 text-blue-400">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <div className="min-w-0">
+                  <DialogTitle className="text-sm sm:text-base font-bold text-white truncate">
+                    {previewDoc.name}
+                  </DialogTitle>
+                  <DialogDescription className="text-xs text-slate-400 truncate">
+                    {previewDoc.gaceta} • Año {previewDoc.year} • {categoryLabels[previewDoc.category]}
+                  </DialogDescription>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <a
+                  href={getOrdinanceUrl(previewDoc.file, previewDoc.year)}
+                  download
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Descargar PDF</span>
+                </a>
+                <a
+                  href={getOrdinanceUrl(previewDoc.file, previewDoc.year)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all"
+                  title="Abrir en pestaña nueva"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Document Iframe Viewer */}
+            <div className="flex-1 w-full h-full bg-slate-100 relative">
+              <iframe
+                src={`${getOrdinanceUrl(previewDoc.file, previewDoc.year)}#toolbar=0&navpanes=0`}
+                title={previewDoc.name}
+                className="w-full h-full border-0"
+              />
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
     </section>
   );
 }
