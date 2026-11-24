@@ -26,11 +26,11 @@ const INSTITUTIONAL_SLIDES = [
     period: "SEDE OFICIAL PAMPATAR"
   },
   {
-    image: "/images/3.png",
-    mobileImage: "/images/3.png",
-    quote: "“Puertas Abiertas a la Participación Ciudadana”",
-    subtitle: "Sesiones públicas, derecho de palabra vecinal y rendición de cuentas permanente.",
-    period: "ATENCIÓN CIUDADANA 24/7"
+    image: "/images/banner-ordenanzas-slide.jpg",
+    mobileImage: "/images/banner-ordenanzas-slide.jpg",
+    quote: "“Conoce Nuestras Ordenanzas Municipales”",
+    subtitle: "Marco legal actualizado, gacetas oficiales y normativas para el desarrollo armónico de Maneiro.",
+    period: "MARCO LEGAL Y GACETAS"
   }
 ];
 
