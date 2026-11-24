@@ -19,11 +19,11 @@ const INSTITUTIONAL_SLIDES = [
     period: "PERIODO LEGISLATIVO 2025 – 2029"
   },
   {
-    image: "/images/1.png",
-    mobileImage: "/images/1.png",
-    quote: "“Trabajando en la Calle con Nuestra Gente”",
-    subtitle: "Cercanía, escucha activa y soluciones legislativas construidas junto a cada comunidad.",
-    period: "CONSULTAS PÚBLICAS Y CABILDOS"
+    image: "/images/banner-sede-bienvenidos.jpg",
+    mobileImage: "/images/banner-sede-bienvenidos.jpg",
+    quote: "“Bienvenidos al Concejo Municipal de Maneiro”",
+    subtitle: "Sede Histórica en Pampatar: Puertas abiertas a la ciudadanía, la participación vecinal y el progreso de nuestra gente.",
+    period: "SEDE OFICIAL PAMPATAR"
   },
   {
     image: "/images/3.png",
