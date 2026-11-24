@@ -12,19 +12,22 @@ import AtencionVecinoModal from "@/components/AtencionVecinoModal";
 // Institutional Slides showing collective council work & community engagement
 const INSTITUTIONAL_SLIDES = [
   {
-    image: "/images/2.png",
+    image: "/images/concejales-desktop-team.jpg",
+    mobileImage: "/images/concejales-mobile-team.jpg",
     quote: "“Legislando con Transparencia para Todo Maneiro”",
     subtitle: "Cuerpo edilicio colegiado y plural al servicio del orden, la seguridad y el progreso de nuestro municipio.",
     period: "PERIODO LEGISLATIVO 2025 – 2029"
   },
   {
     image: "/images/1.png",
+    mobileImage: "/images/1.png",
     quote: "“Trabajando en la Calle con Nuestra Gente”",
     subtitle: "Cercanía, escucha activa y soluciones legislativas construidas junto a cada comunidad.",
     period: "CONSULTAS PÚBLICAS Y CABILDOS"
   },
   {
     image: "/images/3.png",
+    mobileImage: "/images/3.png",
     quote: "“Puertas Abiertas a la Participación Ciudadana”",
     subtitle: "Sesiones públicas, derecho de palabra vecinal y rendición de cuentas permanente.",
     period: "ATENCIÓN CIUDADANA 24/7"
@@ -84,15 +87,22 @@ export default function Hero() {
                 transition={{ duration: 0.6 }}
                 className="absolute inset-0 w-full h-full"
               >
-                <img
-                  src={INSTITUTIONAL_SLIDES[currentSlide].image}
-                  alt={INSTITUTIONAL_SLIDES[currentSlide].quote}
-                  className="w-full h-full object-cover object-top sm:object-[center_20%] transition-transform duration-1000"
-                />
+                {/* Responsive Picture: En móviles carga la composición vertical del equipo donde todos se ven enteros; en desktop la panorámica */}
+                <picture className="w-full h-full block">
+                  <source
+                    media="(max-width: 640px)"
+                    srcSet={INSTITUTIONAL_SLIDES[currentSlide].mobileImage || INSTITUTIONAL_SLIDES[currentSlide].image}
+                  />
+                  <img
+                    src={INSTITUTIONAL_SLIDES[currentSlide].image}
+                    alt={INSTITUTIONAL_SLIDES[currentSlide].quote}
+                    className="w-full h-full object-cover object-center sm:object-[center_20%] transition-transform duration-1000"
+                  />
+                </picture>
                 
                 {/* Modern Cinematic Gradients adaptados para legibilidad sin tapar los rostros */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/40 sm:to-slate-950/20" />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-transparent to-slate-950/40 sm:to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/30 sm:to-slate-950/20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-transparent to-slate-950/30 sm:to-transparent" />
               </motion.div>
             </AnimatePresence>
 
