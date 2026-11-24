@@ -146,69 +146,66 @@ export default function Concejales() {
   };
 
   return (
-    <section id="concejales" className="py-20 sm:py-28 bg-[#f4f7fb] relative overflow-hidden">
+    <section id="concejales" className="py-12 sm:py-20 bg-[#f4f7fb] relative overflow-hidden">
       
       {/* Decorative background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-blue-100/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-blue-100/50 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header Section with Navigation Buttons */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold uppercase tracking-wider mb-3">
-              <Users className="w-3.5 h-3.5" />
-              <span>Poder Legislativo Municipal</span>
+        {/* Header Section with Navigation Buttons (Más compacto y directo) */}
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-1.5">
+              <Users className="w-3 h-3" />
+              <span>Cuerpo Legislativo</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              Cuerpo de Concejales de Maneiro
+            <h2 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Concejales de Maneiro
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
-              Representantes elegidos por el pueblo que construyen leyes, defienden los derechos ciudadanos y trabajan por el bienestar de nuestras comunidades.
-            </p>
           </div>
 
           {/* Slider Controls */}
-          <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             <Button
               variant="outline"
               size="icon"
               onClick={prev}
-              className="rounded-full w-11 h-11 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
+              className="rounded-full w-9 h-9 sm:w-10 sm:h-10 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
               aria-label="Concejal anterior"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
             <Button
               variant="outline"
               size="icon"
               onClick={next}
-              className="rounded-full w-11 h-11 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
+              className="rounded-full w-9 h-9 sm:w-10 sm:h-10 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
               aria-label="Concejal siguiente"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           </div>
         </div>
 
-        {/* Concejales Slider (Cards compactas de 2 columnas en desktop / slider horizontal) */}
+        {/* Concejales Slider: Tarjetas Pro tipo credencial ejecutiva, sin espacios vacíos */}
         <div className="relative overflow-hidden">
           <motion.div
             animate={{ x: `-${currentIndex * (100 / (typeof window !== 'undefined' && window.innerWidth < 640 ? 1 : 2))}%` }}
             transition={{ type: "spring", stiffness: 280, damping: 28 }}
-            className="flex gap-6"
+            className="flex gap-4 sm:gap-6"
           >
             {CONCEJALES_DATA.map((c) => (
               <motion.div
                 key={c.name}
-                className="min-w-full sm:min-w-[calc(50%-0.75rem)] bg-white rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between group cursor-pointer"
+                className="min-w-full sm:min-w-[calc(50%-0.75rem)] bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-lg transition-all duration-300 p-4 sm:p-5 flex flex-col justify-between group cursor-pointer"
                 onClick={() => setSelectedConcejal(c)}
               >
                 <div>
                   {/* Top Profile Header */}
-                  <div className="flex items-start gap-4 mb-4">
+                  <div className="flex items-center gap-3.5 mb-3">
                     <div className="relative shrink-0">
-                      <div className="w-16 h-16 rounded-full ring-3 ring-sky-500/80 p-0.5 bg-white shadow-sm overflow-hidden flex items-center justify-center">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full ring-2 sm:ring-3 ring-sky-500/80 p-0.5 bg-white shadow-sm overflow-hidden flex items-center justify-center">
                         <img
                           src={c.avatar}
                           alt={c.name}
@@ -219,12 +216,12 @@ export default function Concejales() {
                         />
                       </div>
                       {/* Active Status Dot */}
-                      <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
+                      <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
                     </div>
 
-                    <div className="flex-1 min-w-0 pt-0.5">
+                    <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <h3 className="text-base sm:text-lg font-bold text-slate-900 truncate">
+                        <h3 className="text-sm sm:text-base font-bold text-slate-900 truncate">
                           {c.name}
                         </h3>
                         {/* Blue Verified Check */}
@@ -232,42 +229,42 @@ export default function Concejales() {
                           <Check className="w-2.5 h-2.5 stroke-[3]" />
                         </div>
                       </div>
-                      <p className="text-xs text-slate-500 font-medium truncate">
+                      <p className="text-[11px] text-slate-500 font-medium truncate">
                         {c.handle}
                       </p>
-                      <span className="inline-block mt-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">
+                      <span className="inline-block mt-1 text-[10px] sm:text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">
                         {c.role}
                       </span>
                     </div>
                   </div>
 
-                  {/* Commission Badge */}
-                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 mb-4">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1">
+                  {/* Commission Badge Compacto */}
+                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 mb-2.5">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-0.5 flex items-center gap-1">
                       <Briefcase className="w-3 h-3 text-slate-500" />
                       <span>Comisión Responsable</span>
                     </div>
-                    <p className="text-xs font-semibold text-slate-800 line-clamp-2">
+                    <p className="text-xs font-semibold text-slate-800 line-clamp-1">
                       {c.commission}
                     </p>
                   </div>
 
-                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
                     {c.description}
                   </p>
                 </div>
 
-                {/* Bottom Action */}
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                {/* Bottom Action Button Compacto */}
+                <div className="pt-2 border-t border-slate-100">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedConcejal(c);
                     }}
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-slate-900 hover:bg-blue-600 text-white text-xs font-bold transition-all shadow-2xs group-hover:shadow-sm"
+                    className="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 text-white text-xs font-bold transition-all shadow-2xs group-hover:shadow-sm"
                   >
                     <span>Ver Perfil & Comisiones</span>
-                    <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                    <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </button>
                 </div>
               </motion.div>
@@ -276,14 +273,14 @@ export default function Concejales() {
         </div>
 
         {/* Slider Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-1.5 mt-5">
           {CONCEJALES_DATA.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
               aria-label={`Ir a concejal ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                currentIndex === i ? "w-8 bg-blue-600" : "w-2 bg-slate-300"
+                currentIndex === i ? "w-6 bg-blue-600 shadow" : "w-2 bg-slate-300"
               }`}
             />
           ))}
