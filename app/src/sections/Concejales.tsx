@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { 
   Check, 
@@ -198,7 +198,7 @@ export default function Concejales() {
             transition={{ type: "spring", stiffness: 280, damping: 28 }}
             className="flex gap-6"
           >
-            {CONCEJALES_DATA.map((c, idx) => (
+            {CONCEJALES_DATA.map((c) => (
               <motion.div
                 key={c.name}
                 className="min-w-full sm:min-w-[calc(50%-0.75rem)] bg-white rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between group cursor-pointer"
