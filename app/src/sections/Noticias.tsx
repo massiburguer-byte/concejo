@@ -135,14 +135,14 @@ export default function Noticias() {
         {/* Carousel Grid */}
         <div className="relative overflow-hidden">
           <motion.div
-            animate={{ x: `-${currentIndex * (100 / (window.innerWidth < 768 ? 1 : 3))}%` }}
+            animate={{ x: `-${currentIndex * (100 / (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 2))}%` }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="flex gap-6"
           >
             {noticias.map((n, i) => (
               <motion.article
                 key={i}
-                className="min-w-full md:min-w-[calc(33.333%-1rem)] group relative rounded-[2rem] overflow-hidden bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                className="min-w-full md:min-w-[calc(50%-0.75rem)] group relative rounded-[2rem] overflow-hidden bg-white border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
                 onClick={() => setSelectedNoticia(n)}
               >
                 <div>

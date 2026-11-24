@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { 
   Check, 
@@ -7,7 +7,8 @@ import {
   FileText, 
   MessageCircle, 
   Briefcase, 
-  ChevronRight
+  ChevronRight,
+  ChevronLeft
 } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -134,6 +135,15 @@ const CONCEJALES_DATA: ConcejalInfo[] = [
 
 export default function Concejales() {
   const [selectedConcejal, setSelectedConcejal] = useState<ConcejalInfo | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const next = () => {
+    setCurrentIndex((prev) => (prev + 1) % CONCEJALES_DATA.length);
+  };
+
+  const prev = () => {
+    setCurrentIndex((prev) => (prev - 1 + CONCEJALES_DATA.length) % CONCEJALES_DATA.length);
+  };
 
   return (
     <section id="concejales" className="py-20 sm:py-28 bg-[#f4f7fb] relative overflow-hidden">
@@ -143,95 +153,139 @@ export default function Concejales() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header Section */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold uppercase tracking-wider mb-3">
-            <Users className="w-3.5 h-3.5" />
-            <span>Poder Legislativo Municipal</span>
+        {/* Header Section with Navigation Buttons */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold uppercase tracking-wider mb-3">
+              <Users className="w-3.5 h-3.5" />
+              <span>Poder Legislativo Municipal</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+              Cuerpo de Concejales de Maneiro
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
+              Representantes elegidos por el pueblo que construyen leyes, defienden los derechos ciudadanos y trabajan por el bienestar de nuestras comunidades.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Cuerpo de Concejales de Maneiro
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
-            Representantes elegidos por el pueblo que construyen leyes, defienden los derechos ciudadanos y trabajan por el bienestar de nuestras comunidades.
-          </p>
+
+          {/* Slider Controls */}
+          <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={prev}
+              className="rounded-full w-11 h-11 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
+              aria-label="Concejal anterior"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={next}
+              className="rounded-full w-11 h-11 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
+              aria-label="Concejal siguiente"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
         </div>
 
-        {/* Concejales Grid with Verified Card Design */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CONCEJALES_DATA.map((c, idx) => (
-            <motion.div
-              key={c.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="bg-white rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col justify-between group"
-            >
-              <div>
-                {/* Top Profile Header */}
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative shrink-0">
-                    <div className="w-16 h-16 rounded-full ring-3 ring-sky-500/80 p-0.5 bg-white shadow-sm overflow-hidden flex items-center justify-center">
-                      <img
-                        src={c.avatar}
-                        alt={c.name}
-                        className="w-full h-full object-cover object-top rounded-full"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = c.image;
-                        }}
-                      />
-                    </div>
-                    {/* Active Status Dot */}
-                    <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
-                  </div>
-
-                  <div className="flex-1 min-w-0 pt-0.5">
-                    <div className="flex items-center gap-1.5">
-                      <h3 className="text-base sm:text-lg font-bold text-slate-900 truncate">
-                        {c.name}
-                      </h3>
-                      {/* Blue Verified Check */}
-                      <div className="w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-2xs" title="Verificado">
-                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+        {/* Concejales Slider (Cards compactas de 2 columnas en desktop / slider horizontal) */}
+        <div className="relative overflow-hidden">
+          <motion.div
+            animate={{ x: `-${currentIndex * (100 / (typeof window !== 'undefined' && window.innerWidth < 640 ? 1 : 2))}%` }}
+            transition={{ type: "spring", stiffness: 280, damping: 28 }}
+            className="flex gap-6"
+          >
+            {CONCEJALES_DATA.map((c, idx) => (
+              <motion.div
+                key={c.name}
+                className="min-w-full sm:min-w-[calc(50%-0.75rem)] bg-white rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col justify-between group cursor-pointer"
+                onClick={() => setSelectedConcejal(c)}
+              >
+                <div>
+                  {/* Top Profile Header */}
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="relative shrink-0">
+                      <div className="w-16 h-16 rounded-full ring-3 ring-sky-500/80 p-0.5 bg-white shadow-sm overflow-hidden flex items-center justify-center">
+                        <img
+                          src={c.avatar}
+                          alt={c.name}
+                          className="w-full h-full object-cover object-top rounded-full"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = c.image;
+                          }}
+                        />
                       </div>
+                      {/* Active Status Dot */}
+                      <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
                     </div>
-                    <p className="text-xs text-slate-500 font-medium truncate">
-                      {c.handle}
-                    </p>
-                    <span className="inline-block mt-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">
-                      {c.role}
-                    </span>
-                  </div>
-                </div>
 
-                {/* Commission Badge */}
-                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 mb-4">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1">
-                    <Briefcase className="w-3 h-3 text-slate-500" />
-                    <span>Comisión Responsable</span>
+                    <div className="flex-1 min-w-0 pt-0.5">
+                      <div className="flex items-center gap-1.5">
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 truncate">
+                          {c.name}
+                        </h3>
+                        {/* Blue Verified Check */}
+                        <div className="w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-2xs" title="Verificado">
+                          <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        </div>
+                      </div>
+                      <p className="text-xs text-slate-500 font-medium truncate">
+                        {c.handle}
+                      </p>
+                      <span className="inline-block mt-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">
+                        {c.role}
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-xs font-semibold text-slate-800 line-clamp-2">
-                    {c.commission}
+
+                  {/* Commission Badge */}
+                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 mb-4">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1">
+                      <Briefcase className="w-3 h-3 text-slate-500" />
+                      <span>Comisión Responsable</span>
+                    </div>
+                    <p className="text-xs font-semibold text-slate-800 line-clamp-2">
+                      {c.commission}
+                    </p>
+                  </div>
+
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
+                    {c.description}
                   </p>
                 </div>
 
-                <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
-                  {c.description}
-                </p>
-              </div>
+                {/* Bottom Action */}
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedConcejal(c);
+                    }}
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-slate-900 hover:bg-blue-600 text-white text-xs font-bold transition-all shadow-2xs group-hover:shadow-sm"
+                  >
+                    <span>Ver Perfil & Comisiones</span>
+                    <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
-              {/* Bottom Action */}
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                <button
-                  onClick={() => setSelectedConcejal(c)}
-                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-slate-900 hover:bg-blue-600 text-white text-xs font-bold transition-all shadow-2xs group-hover:shadow-sm"
-                >
-                  <span>Ver Perfil & Comisiones</span>
-                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                </button>
-              </div>
-            </motion.div>
+        {/* Slider Indicators */}
+        <div className="flex justify-center gap-2 mt-8">
+          {CONCEJALES_DATA.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              aria-label={`Ir a concejal ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                currentIndex === i ? "w-8 bg-blue-600" : "w-2 bg-slate-300"
+              }`}
+            />
           ))}
         </div>
 

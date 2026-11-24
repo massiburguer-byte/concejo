@@ -108,7 +108,7 @@ export default function Ordenanzas() {
       .map((doc: Ordinance) => ({ ...doc, year }))
   );
 
-  const ITEMS_PER_PAGE = 4;
+  const ITEMS_PER_PAGE = 6;
   const totalPages = Math.ceil(filteredDocs.length / ITEMS_PER_PAGE);
   const paginatedDocs = filteredDocs.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -251,20 +251,20 @@ export default function Ordenanzas() {
               )}
             </div>
 
-            {/* Horizontal cards container */}
-            <div className="flex flex-col gap-4">
+            {/* Horizontal / 2 columns cards container */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {paginatedDocs.map((doc, i) => (
                 <motion.div
                   key={doc.file}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: Math.min(i * 0.03, 0.3) }}
-                  className="group relative bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm hover:shadow-md hover:border-primary/20 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+                  className="group relative bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all flex flex-col justify-between gap-4"
                 >
-                  {/* Left Side: Badges, Title, Desc */}
+                  {/* Top: Badges, Title, Desc */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2.5 mb-3">
-                      <span className={`px-3 py-1 rounded-full text-[0.6rem] font-bold uppercase tracking-wider border ${categoryColors[doc.category]}`}>
+                    <div className="flex flex-wrap items-center gap-2 mb-2.5">
+                      <span className={`px-2.5 py-0.5 rounded-full text-[0.6rem] font-bold uppercase tracking-wider border ${categoryColors[doc.category]}`}>
                         {categoryLabels[doc.category]}
                       </span>
                       <span className="text-[0.65rem] font-bold text-slate-400">
@@ -276,29 +276,29 @@ export default function Ordenanzas() {
                       </span>
                     </div>
 
-                    <h3 className="text-base font-black text-slate-900 leading-snug tracking-tight mb-1 group-hover:text-primary transition-colors">
+                    <h3 className="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight mb-1.5 group-hover:text-primary transition-colors line-clamp-2">
                       {highlightText(doc.name, search)}
                     </h3>
                     
-                    <p className="text-xs text-muted-foreground leading-relaxed max-w-3xl">
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                       {highlightText(doc.description, search)}
                     </p>
                   </div>
 
-                  {/* Right Side: Action Buttons */}
-                  <div className="flex items-center gap-2 flex-shrink-0 w-full md:w-auto">
+                  {/* Bottom: Action Buttons */}
+                  <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
                     <button
                       onClick={() => setPreviewDoc(doc)}
-                      className="flex-1 md:flex-none h-11 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs uppercase tracking-wider gap-1.5 flex items-center justify-center transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-2xs"
+                      className="flex-1 h-10 px-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-800 font-bold text-xs uppercase tracking-wider gap-1.5 flex items-center justify-center transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-2xs"
                     >
-                      <Eye className="w-4 h-4 text-blue-600" />
+                      <Eye className="w-3.5 h-3.5 text-blue-600" />
                       <span>Ver</span>
                     </button>
                     <a
                       href={getOrdinanceUrl(doc.file, doc.year)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 md:flex-none h-11 px-5 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs uppercase tracking-wider gap-2 flex items-center justify-center transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm"
+                      className="flex-1 h-10 px-4 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs uppercase tracking-wider gap-1.5 flex items-center justify-center transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm"
                     >
                       <Download className="w-3.5 h-3.5" />
                       <span>Descargar</span>
@@ -308,7 +308,7 @@ export default function Ordenanzas() {
               ))}
 
               {filteredDocs.length === 0 && (
-                <div className="py-20 text-center bg-white border border-slate-200/80 rounded-3xl shadow-sm">
+                <div className="col-span-full py-16 text-center bg-white border border-slate-200/80 rounded-3xl shadow-sm">
                   <p className="text-muted-foreground italic">No se encontraron ordenanzas que coincidan con los filtros seleccionados.</p>
                 </div>
               )}

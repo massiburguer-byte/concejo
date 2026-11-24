@@ -74,7 +74,7 @@ export default function Hero() {
         <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-slate-200/90 shadow-xl overflow-hidden p-3 sm:p-5 transition-all">
 
           {/* 1. Hero Community Carousel Banner */}
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[16/8] sm:aspect-[16/7] md:aspect-[16/6] min-h-[300px] sm:min-h-[380px] bg-slate-900 shadow-md">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] xs:aspect-[16/10] sm:aspect-[16/7] md:aspect-[16/6] min-h-[360px] sm:min-h-[400px] bg-slate-900 shadow-md">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -87,20 +87,20 @@ export default function Hero() {
                 <img
                   src={INSTITUTIONAL_SLIDES[currentSlide].image}
                   alt={INSTITUTIONAL_SLIDES[currentSlide].quote}
-                  className="w-full h-full object-cover object-center scale-100 transition-transform duration-1000"
+                  className="w-full h-full object-cover object-top sm:object-center transition-transform duration-1000"
                 />
                 
                 {/* Modern Cinematic Gradients */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-slate-950/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-slate-950/20" />
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-transparent to-transparent" />
               </motion.div>
             </AnimatePresence>
 
             {/* Top Right Period Badge */}
-            <div className="absolute top-4 right-4 sm:top-5 sm:right-6 z-20">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-emerald-400 text-xs font-semibold shadow-md">
-                <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
-                <span className="tracking-wide text-white font-bold text-[11px] sm:text-xs">
+            <div className="absolute top-3 right-3 sm:top-5 sm:right-6 z-20">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-emerald-400 text-xs font-semibold shadow-md">
+                <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 stroke-[3]" />
+                <span className="tracking-wide text-white font-bold text-[10px] sm:text-xs">
                   {INSTITUTIONAL_SLIDES[currentSlide].period}
                 </span>
               </div>
@@ -110,20 +110,20 @@ export default function Hero() {
             <button
               onClick={handlePrevSlide}
               aria-label="Slide anterior"
-              className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/60 hover:bg-slate-950/85 backdrop-blur-md text-white flex items-center justify-center border border-white/10 transition-all hover:scale-105 active:scale-95"
+              className="absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950/60 hover:bg-slate-950/85 backdrop-blur-md text-white flex items-center justify-center border border-white/10 transition-all hover:scale-105 active:scale-95"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={handleNextSlide}
               aria-label="Slide siguiente"
-              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/60 hover:bg-slate-950/85 backdrop-blur-md text-white flex items-center justify-center border border-white/10 transition-all hover:scale-105 active:scale-95"
+              className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950/60 hover:bg-slate-950/85 backdrop-blur-md text-white flex items-center justify-center border border-white/10 transition-all hover:scale-105 active:scale-95"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             {/* Bottom Hero Headline & Quote */}
-            <div className="absolute bottom-5 sm:bottom-7 left-4 sm:left-8 right-4 sm:right-8 z-20">
+            <div className="absolute bottom-4 sm:bottom-7 left-3 sm:left-8 right-3 sm:right-8 z-20">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${currentSlide}-text`}
@@ -133,24 +133,24 @@ export default function Hero() {
                   transition={{ duration: 0.4 }}
                   className="max-w-2xl"
                 >
-                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-1 sm:mb-2 drop-shadow-md">
+                  <h1 className="text-base sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug sm:leading-tight mb-1 sm:mb-2 drop-shadow-md">
                     {INSTITUTIONAL_SLIDES[currentSlide].quote}
                   </h1>
-                  <p className="text-xs sm:text-sm md:text-base text-slate-200/90 max-w-xl font-medium leading-relaxed drop-shadow">
+                  <p className="text-[11px] sm:text-sm md:text-base text-slate-200/90 max-w-xl font-medium leading-relaxed drop-shadow line-clamp-2 sm:line-clamp-none">
                     {INSTITUTIONAL_SLIDES[currentSlide].subtitle}
                   </p>
                 </motion.div>
               </AnimatePresence>
 
               {/* Slider Indicator Dots / Pills */}
-              <div className="flex items-center justify-center gap-1.5 mt-4 sm:mt-5">
+              <div className="flex items-center justify-center gap-1.5 mt-3 sm:mt-5">
                 {INSTITUTIONAL_SLIDES.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrentSlide(i)}
                     aria-label={`Ir a slide ${i + 1}`}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      currentSlide === i ? "w-10 bg-white" : "w-5 bg-white/40 hover:bg-white/70"
+                      currentSlide === i ? "w-8 sm:w-10 bg-white" : "w-4 sm:w-5 bg-white/40 hover:bg-white/70"
                     }`}
                   />
                 ))}
