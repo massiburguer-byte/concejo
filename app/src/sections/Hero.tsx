@@ -55,7 +55,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="inicio" className="relative pt-[env(safe-area-inset-top,0px)] sm:pt-28 pb-6 sm:pb-10 px-0 sm:px-6 lg:px-8 bg-[#0a192f] sm:bg-[#eef3f8]">
+    <section id="inicio" className="relative pt-[calc(env(safe-area-inset-top,0px)+3.75rem)] sm:pt-28 pb-6 sm:pb-10 px-0 sm:px-6 lg:px-8 bg-[#0a192f] sm:bg-[#eef3f8]">
       <div className="max-w-6xl mx-auto">
 
         {/* Top Institutional Badge Bar (En Desktop) */}
@@ -77,7 +77,7 @@ export default function Hero() {
         <div className="relative bg-slate-950 sm:bg-white sm:rounded-[2.5rem] sm:border sm:border-slate-200/90 sm:shadow-xl overflow-hidden p-0 sm:p-5 transition-all">
 
           {/* 1. Hero Community Carousel Banner (Ocupa la pantalla en móvil con visualización nítida y completa) */}
-          <div className="relative overflow-hidden w-full h-[75vh] min-h-[500px] sm:h-auto sm:min-h-[440px] sm:aspect-[16/7] md:aspect-[16/6] sm:rounded-3xl bg-slate-950 shadow-md">
+          <div className="relative overflow-hidden w-full h-[78vh] min-h-[520px] sm:h-auto sm:min-h-[440px] sm:aspect-[16/7] md:aspect-[16/6] sm:rounded-3xl bg-slate-950 shadow-md">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -96,25 +96,15 @@ export default function Hero() {
                   <img
                     src={INSTITUTIONAL_SLIDES[currentSlide].image}
                     alt={INSTITUTIONAL_SLIDES[currentSlide].quote}
-                    className="w-full h-full object-cover object-center sm:object-[center_20%] transition-transform duration-1000"
+                    className="w-full h-full object-cover object-top sm:object-[center_20%] transition-transform duration-1000"
                   />
                 </picture>
                 
-                {/* Modern Cinematic Gradients: Sutil en el fondo y concentrado abajo para dar brillo y nitidez a las fotos */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent sm:via-slate-950/20" />
+                {/* Modern Cinematic Gradients: Despejado arriba para que no corte ni oscurezca cabezas o títulos */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/20 to-transparent sm:via-slate-950/20" />
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950/40 via-transparent to-transparent sm:from-slate-950/60" />
               </motion.div>
             </AnimatePresence>
-
-            {/* Top Right Period Badge */}
-            <div className="absolute top-16 sm:top-5 right-4 sm:right-6 z-20">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/15 text-emerald-400 text-xs font-semibold shadow-lg">
-                <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 stroke-[3]" />
-                <span className="tracking-wide text-white font-bold text-[10px] sm:text-xs">
-                  {INSTITUTIONAL_SLIDES[currentSlide].period}
-                </span>
-              </div>
-            </div>
 
             {/* Carousel Arrow Controls */}
             <button
@@ -134,6 +124,14 @@ export default function Hero() {
 
             {/* Bottom Hero Headline & Quote */}
             <div className="absolute bottom-5 sm:bottom-7 left-4 sm:left-8 right-4 sm:right-8 z-20">
+              {/* Badge de Periodo Legislativo reubicado abajo: Nunca tapa las cabezas arriba */}
+              <div className="mb-2.5">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-white/20 text-emerald-400 text-[10px] sm:text-xs font-bold tracking-wide shadow-md">
+                  <Check className="w-3 h-3 text-emerald-400 stroke-[3]" />
+                  <span>{INSTITUTIONAL_SLIDES[currentSlide].period}</span>
+                </span>
+              </div>
+
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${currentSlide}-text`}
