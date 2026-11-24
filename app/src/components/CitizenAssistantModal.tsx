@@ -44,7 +44,7 @@ const KNOWLEDGE_BASE: Record<string, { answer: string; href?: string; linkText?:
     suggestions: ["¿Quiénes son los concejales?", "¿Dónde queda la sede?", "Ver ordenanzas aprobadas"]
   },
   sede: {
-    answer: "La sede del Concejo Municipal de Maneiro está ubicada en la Calle Joaquín Maneiro, frente a la Plaza Bolívar de Pampatar, Municipio Maneiro, Isla de Margarita, Nueva Esparta. Horario de atención: Lunes a Viernes de 8:00 AM a 4:00 PM.",
+    answer: "La sede del Concejo Municipal de Maneiro está ubicada en la Calle Joaquín Maneiro, frente a la Plaza de Armas de Pampatar, Municipio Maneiro, Isla de Margarita, Nueva Esparta. Horario de atención: Lunes a Viernes de 8:00 AM a 4:00 PM.",
     href: "#contacto",
     linkText: "Ver Mapa y Datos de Contacto",
     suggestions: ["Teléfono de contacto", "Escribir por WhatsApp", "¿Qué trámites puedo hacer?"]

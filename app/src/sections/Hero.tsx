@@ -71,7 +71,7 @@ export default function Hero() {
 
           <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Sede Municipal: Plaza Bolívar de Pampatar • Isla de Margarita</span>
+            <span>Sede Municipal: Plaza de Armas • Pampatar</span>
           </div>
         </div>
 
