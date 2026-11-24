@@ -12,7 +12,7 @@ import AtencionVecinoModal from "@/components/AtencionVecinoModal";
 // Institutional Slides showing collective council work & community engagement
 const INSTITUTIONAL_SLIDES = [
   {
-    image: "/images/2.png",
+    image: "/images/banner-concejales-principal.jpg",
     mobileImage: "/images/concejales-mobile-team.jpg",
     quote: "“Legislando con Transparencia para Todo Maneiro”",
     subtitle: "Cuerpo edilicio colegiado y plural al servicio del orden, la seguridad y el progreso de nuestro municipio.",
