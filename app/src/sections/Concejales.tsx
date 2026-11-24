@@ -146,55 +146,52 @@ export default function Concejales() {
   };
 
   return (
-    <section id="concejales" className="py-12 sm:py-20 bg-[#f4f7fb] relative overflow-hidden">
+    <section id="concejales" className="py-6 sm:py-10 bg-[#f4f7fb] relative overflow-hidden">
       
       {/* Decorative background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-blue-100/50 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header Section with Navigation Buttons (Más compacto y directo) */}
-        <div className="flex items-center justify-between mb-6 sm:mb-8">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-1.5">
-              <Users className="w-3 h-3" />
-              <span>Cuerpo Legislativo</span>
-            </div>
-            <h2 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Concejales de Maneiro
-            </h2>
+        {/* Header Section (Compacto y centrado o limpio) */}
+        <div className="mb-4 sm:mb-5">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-1">
+            <Users className="w-3 h-3" />
+            <span>Cuerpo Legislativo</span>
           </div>
-
-          {/* Slider Controls */}
-          <div className="flex items-center gap-2 shrink-0">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prev}
-              className="rounded-full w-9 h-9 sm:w-10 sm:h-10 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
-              aria-label="Concejal anterior"
-            >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={next}
-              className="rounded-full w-9 h-9 sm:w-10 sm:h-10 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all hover:scale-105 active:scale-95"
-              aria-label="Concejal siguiente"
-            >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Button>
-          </div>
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            Concejales de Maneiro
+          </h2>
         </div>
 
-        {/* Concejales Slider: Tarjetas Pro tipo credencial ejecutiva, sin espacios vacíos */}
-        <div className="relative overflow-hidden">
-          <motion.div
-            animate={{ x: `-${currentIndex * (100 / (typeof window !== 'undefined' && window.innerWidth < 640 ? 1 : 2))}%` }}
-            transition={{ type: "spring", stiffness: 280, damping: 28 }}
-            className="flex gap-4 sm:gap-6"
+        {/* Carousel Container con flechas centradas verticalmente en el medio de las tarjetas */}
+        <div className="relative px-0 sm:px-12">
+          
+          {/* Flecha Izquierda centrada verticalmente */}
+          <button
+            onClick={prev}
+            aria-label="Concejal anterior"
+            className="absolute -left-1 sm:left-0 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-600 border border-slate-200/90 shadow-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
           >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+
+          {/* Flecha Derecha centrada verticalmente */}
+          <button
+            onClick={next}
+            aria-label="Concejal siguiente"
+            className="absolute -right-1 sm:right-0 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-600 border border-slate-200/90 shadow-md flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+
+          {/* Concejales Slider: Tarjetas Pro tipo credencial ejecutiva, sin espacios vacíos */}
+          <div className="overflow-hidden rounded-2xl sm:rounded-3xl">
+            <motion.div
+              animate={{ x: `-${currentIndex * (100 / (typeof window !== 'undefined' && window.innerWidth < 640 ? 1 : 2))}%` }}
+              transition={{ type: "spring", stiffness: 280, damping: 28 }}
+              className="flex gap-3 sm:gap-5"
+            >
             {CONCEJALES_DATA.map((c) => (
               <motion.div
                 key={c.name}
@@ -270,6 +267,7 @@ export default function Concejales() {
               </motion.div>
             ))}
           </motion.div>
+          </div>
         </div>
 
         {/* Slider Indicators */}
