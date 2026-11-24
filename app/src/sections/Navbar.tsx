@@ -9,7 +9,6 @@ import {
   MessageSquare, 
   Plus, 
   Compass, 
-  Check,
   Bot,
   Users,
   Sun,
@@ -122,26 +121,8 @@ export default function Navbar() {
                 <img 
                   src="/images/logo.png" 
                   alt="Logo Concejo Municipal Maneiro" 
-                  className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow" 
+                  className="h-[34px] sm:h-[42px] w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow" 
                 />
-              </div>
-
-              {/* Title & Verified Badge on Mobile & Desktop */}
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs sm:text-sm md:text-base font-black tracking-tight text-white leading-none drop-shadow-sm">
-                    Concejo Maneiro
-                  </span>
-                  <div 
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-blue-500 flex items-center justify-center text-white shrink-0 shadow-sm" 
-                    title="Cuenta Oficial Verificada"
-                  >
-                    <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-[3]" />
-                  </div>
-                </div>
-                <span className="text-[9px] sm:text-[10px] text-blue-200/80 font-semibold uppercase tracking-wider hidden xs:block">
-                  Portal Oficial
-                </span>
               </div>
             </div>
           </a>
