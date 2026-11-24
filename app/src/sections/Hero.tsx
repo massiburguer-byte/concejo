@@ -100,9 +100,9 @@ export default function Hero() {
                   />
                 </picture>
                 
-                {/* Modern Cinematic Gradients adaptados para legibilidad sin tapar los rostros */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/30 sm:to-slate-950/20" />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-transparent to-slate-950/30 sm:to-transparent" />
+                {/* Modern Cinematic Gradients: Sutil en el fondo y concentrado abajo para dar brillo y nitidez a las fotos */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent sm:via-slate-950/20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/40 via-transparent to-transparent sm:from-slate-950/60" />
               </motion.div>
             </AnimatePresence>
 
