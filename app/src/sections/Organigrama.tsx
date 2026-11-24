@@ -1,216 +1,339 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { 
   Users, 
   ShieldCheck, 
   Scale, 
   FileText, 
-  Briefcase,
-  Info
+  Briefcase, 
+  Download
 } from "lucide-react";
 
-const structure = {
-  president: {
-    title: "Presidente",
+interface TabSection {
+  id: string;
+  label: string;
+  icon: any;
+}
+
+const TABS: TabSection[] = [
+  { id: "directiva", label: "Junta Directiva", icon: ShieldCheck },
+  { id: "comisiones", label: "Comisiones Legislativas", icon: Scale },
+  { id: "control", label: "Secretaría y Control", icon: FileText },
+  { id: "admin", label: "Direcciones y Atención", icon: Briefcase },
+];
+
+const DIRECTIVA = [
+  {
+    role: "Presidenta de Cámara",
+    name: "Carolina Guerra",
+    description: "Máxima representación del órgano legislativo, conducción de las sesiones plenarias y coordinación institucional.",
+    badge: "Directiva",
     icon: ShieldCheck,
-    color: "bg-primary shadow-glow",
+    color: "bg-blue-600 text-white"
   },
-  vices: [
-    { title: "1er Vice-Presidente", icon: Users },
-    { title: "2do Vice-Presidente", icon: Users },
-  ],
-  legislative: [
-    { title: "Secretaría de Cámara", icon: FileText },
-    { title: "Cronista del Municipio", icon: FileText },
-    { title: "Auditoría Interna", icon: ShieldCheck },
-  ],
-  commissions: [
-    "Legislación y Ejidos",
-    "Finanzas Públicas",
-    "Turismo y Recreación",
-    "Educación y Cultura",
-    "Urbanismo y Servicios",
-    "Seguridad Ciudadana",
-    "Salud y Desarrollo Social",
-  ],
-  administration: [
-    "Recursos Humanos",
-    "Dirección de Administración",
-    "Consultoría Jurídica",
-    "Atención al Ciudadano",
-    "Informática",
-  ]
-};
+  {
+    role: "1ra Vicepresidenta",
+    name: "Eulys Cedeño",
+    description: "Sustitución reglamentaria de presidencia, enlace con organizaciones comunitarias y comisiones de desarrollo.",
+    badge: "Directiva",
+    icon: Users,
+    color: "bg-emerald-600 text-white"
+  },
+  {
+    role: "2do Vicepresidente",
+    name: "José Gregorio Marcano",
+    description: "Coordinación de seguimiento a ordenanzas urbanas, servicios públicos y atención vecinal en parroquias.",
+    badge: "Directiva",
+    icon: Users,
+    color: "bg-purple-600 text-white"
+  }
+];
+
+const COMISIONES = [
+  {
+    name: "Comisión de Legislación y Ejidos",
+    titular: "Concejalía Presidencial",
+    focus: "Revisión técnica de proyectos de ordenanza, reformas y regularización jurídica de tierras ejidales."
+  },
+  {
+    name: "Comisión de Finanzas Públicas y Presupuesto",
+    titular: "Concejal Gilberto Rojas",
+    focus: "Seguimiento al presupuesto municipal, tasas de servicios, recaudación y solvencia tributaria (SEDEMATRI)."
+  },
+  {
+    name: "Comisión de Seguridad Ciudadana, Convivencia y Movilidad",
+    titular: "Concejal Asdrúbal Delgado",
+    focus: "Ordenanza de convivencia vial, programa cero ruidos molestos, orden público y seguridad vecinal."
+  },
+  {
+    name: "Comisión de Urbanismo, Servicios Públicos y Ambiente",
+    titular: "Concejal José Gregorio Marcano",
+    focus: "Planificación territorial, aseo urbano, arbolado y ordenación de corredores viales en Maneiro."
+  },
+  {
+    name: "Comisión de Turismo, Emprendimiento y Desarrollo Económico",
+    titular: "Concejal Haroldo Rojas",
+    focus: "Impulso al comercio, zonas gastronómicas de Pampatar y régimen simplificado de emprendimientos."
+  },
+  {
+    name: "Comisión de Educación, Cultura, Deporte y Recreación",
+    titular: "Concejala Eulys Cedeño",
+    focus: "Preservación del patrimonio histórico, becas al mérito, orden Jesús Ávila y espacios deportivos."
+  },
+  {
+    name: "Comisión de Desarrollo Social, Familia y Adulto Mayor",
+    titular: "Concejala Ana González",
+    focus: "Atención a la economía plateada, protección a la mujer (IMMUJER) y salud comunitaria."
+  }
+];
+
+const CONTROL = [
+  {
+    title: "Secretaría de Cámara",
+    duty: "Redacción de actas de sesiones, custodia del archivo legislativo y expedición de certificaciones de ordenanzas."
+  },
+  {
+    title: "Auditoría Interna",
+    duty: "Fiscalización del cumplimiento normativo, control previo y posterior de los recursos públicos municipales."
+  },
+  {
+    title: "Cronista del Municipio Maneiro",
+    duty: "Investigación, registro y divulgación de la memoria histórica, costumbres y fechas patrias de Pampatar y Los Robles."
+  }
+];
+
+const ADMIN = [
+  {
+    title: "Dirección de Atención al Ciudadano",
+    duty: "Recepción de solicitudes vecinales, denuncias, canalización de derechos de palabra y audiencias públicas."
+  },
+  {
+    title: "Consultoría Jurídica",
+    duty: "Asesoría legal a la presidencia y comisiones en la técnica legislativa y adecuación constitucional de normas."
+  },
+  {
+    title: "Dirección de Administración y Finanzas",
+    duty: "Ejecución presupuestaria, nómina del personal legislativo y compras institucionales."
+  },
+  {
+    title: "Informática y Modernización Digital",
+    duty: "Administración del portal web, gacetas digitales, redes oficiales y asistencia tecnológica."
+  }
+];
 
 export default function Organigrama() {
+  const [activeTab, setActiveTab] = useState("directiva");
+
   return (
-    <section id="organigrama" className="relative py-24 sm:py-32 bg-[#f0f4f8] overflow-hidden">
-      {/* Decorative background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)]" />
+    <section id="organigrama" className="relative py-20 sm:py-28 bg-[#f4f7fb] overflow-hidden">
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+      {/* Decorative gradient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)] pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
           <Badge
             variant="outline"
-            className="mb-4 px-4 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.2em] border-primary/30 text-primary bg-primary/10"
+            className="mb-3 px-4 py-1 text-[11px] font-bold uppercase tracking-wider border-blue-200 text-blue-700 bg-blue-50"
           >
-            Transparencia
+            Estructura Institucional
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground mb-6">
-            Estructura Organizativa
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            Organigrama del Concejo Municipal
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Conoce la jerarquía y las diferentes comisiones que integran el Concejo Municipal de Maneiro, diseñadas para una gestión eficiente y transparente.
+          <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
+            Conoce la estructura democrática y funcional diseñada para legislar con eficacia, transparencia y cercanía al vecino.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Visual Chart - Simplified Interactive Version */}
-        <div className="flex flex-col items-center gap-12">
-          {/* Level 1: President */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="glass-card p-8 px-12 rounded-[2.5rem] border-primary/50 shadow-glow flex flex-col items-center group cursor-pointer hover:-translate-y-2 transition-all duration-500">
-              <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-4 shadow-glow">
-                <structure.president.icon className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-black text-slate-800 tracking-tight uppercase tracking-widest text-xs mb-1">
-                {structure.president.title}
-              </h3>
-              <p className="text-primary font-black text-[0.6rem] uppercase tracking-widest">Máxima Autoridad</p>
-            </div>
-            {/* Connector */}
-            <div className="absolute top-full left-1/2 -translate-x-1/2 w-px h-12 bg-gradient-to-b from-primary to-slate-200" />
-          </motion.div>
-
-          {/* Level 2: Vices */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl relative">
-            {/* Horizontal Connector for Vices */}
-            <div className="hidden md:block absolute top-0 left-1/4 right-1/4 h-px bg-slate-200" />
-            
-            {structure.vices.map((vice, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="relative flex flex-col items-center"
-              >
-                <div className="md:absolute -top-12 left-1/2 -translate-x-1/2 w-px h-12 bg-slate-200" />
-                <div className="glass-card p-6 px-10 rounded-[2rem] flex flex-col items-center group hover:border-primary/30 transition-all duration-500">
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
-                    <vice.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h4 className="text-sm font-black text-slate-800 uppercase tracking-widest">{vice.title}</h4>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Level 3: Sections Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-12">
-            {/* Commissions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="glass-card p-8 rounded-[2.5rem] hover:border-accent/30 transition-all group"
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center">
-                  <Scale className="w-6 h-6 text-accent" />
-                </div>
-                <h5 className="text-sm font-black text-slate-800 uppercase tracking-widest">Comisiones Permanente</h5>
-              </div>
-              <div className="space-y-3">
-                {structure.commissions.map((c, i) => (
-                  <div key={i} className="flex items-center gap-3 text-xs text-slate-500 group-hover:text-slate-700 transition-colors">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent/50" />
-                    {c}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Legislative Support */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="glass-card p-8 rounded-[2.5rem] hover:border-primary/30 transition-all group"
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <FileText className="w-6 h-6 text-primary" />
-                </div>
-                <h5 className="text-sm font-black text-slate-800 uppercase tracking-widest">Apoyo Legislativo</h5>
-              </div>
-              <div className="space-y-4">
-                {structure.legislative.map((l, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-primary/20 transition-all">
-                    <p className="text-xs font-bold text-slate-700">{l.title}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Administration */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="glass-card p-8 rounded-[2.5rem] hover:border-emerald-500/30 transition-all group"
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center">
-                  <Briefcase className="w-6 h-6 text-emerald-500" />
-                </div>
-                <h5 className="text-sm font-black text-slate-800 uppercase tracking-widest">Gestión Adm.</h5>
-              </div>
-              <div className="space-y-3">
-                {structure.administration.map((a, i) => (
-                  <div key={i} className="flex items-center gap-3 text-xs text-slate-500 group-hover:text-slate-700 transition-colors">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
-                    {a}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+        {/* Tab Selector Pills */}
+        <div className="flex items-center justify-center gap-2 mb-10 overflow-x-auto pb-2 no-scrollbar">
+          <div className="inline-flex bg-white p-1.5 rounded-full border border-slate-200/90 shadow-sm">
+            {TABS.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
+                    isActive
+                      ? "bg-slate-900 text-white shadow-md scale-[1.02]"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                  }`}
+                >
+                  <Icon className={`w-4 h-4 ${isActive ? "text-emerald-400" : "text-slate-500"}`} />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Footer Action */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-20 flex flex-col items-center"
-        >
-          <div className="p-6 rounded-[2rem] bg-white border border-slate-200/80 shadow-sm max-w-2xl text-center">
-            <Info className="w-6 h-6 text-primary mx-auto mb-4" />
-            <p className="text-xs text-muted-foreground leading-relaxed mb-6">
-              Para ver el detalle técnico completo y las coordinaciones subordinadas, puedes descargar o visualizar el organigrama institucional en alta resolución.
-            </p>
-            <a 
-              href="/images/organigrama.png" 
-              download="Organigrama_Concejo_Maneiro.png"
-              className="px-8 py-4 rounded-2xl bg-primary hover:bg-primary/90 text-white text-[0.7rem] font-black uppercase tracking-widest shadow-glow transition-all hover:-translate-y-1 inline-flex items-center gap-2"
-            >
-              Descargar Organigrama Institucional HD
-            </a>
-          </div>
-        </motion.div>
+        {/* Tab Content Display */}
+        <div className="min-h-[350px]">
+          <AnimatePresence mode="wait">
+            
+            {/* 1. Junta Directiva */}
+            {activeTab === "directiva" && (
+              <motion.div
+                key="directiva"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              >
+                {DIRECTIVA.map((d, i) => {
+                  const Icon = d.icon;
+                  return (
+                    <div
+                      key={i}
+                      className="bg-white rounded-3xl border border-slate-200/90 shadow-md p-6 flex flex-col justify-between hover:shadow-xl transition-all group"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
+                            {d.badge}
+                          </span>
+                          <div className={`w-10 h-10 rounded-2xl ${d.color} flex items-center justify-center shadow-sm`}>
+                            <Icon className="w-5 h-5" />
+                          </div>
+                        </div>
+
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                          {d.role}
+                        </span>
+                        <h3 className="text-xl font-black text-slate-900 mb-3 tracking-tight">
+                          {d.name}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                          {d.description}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-xs font-bold text-blue-600">
+                        <span>Cámara Municipal de Maneiro</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </motion.div>
+            )}
+
+            {/* 2. Comisiones Legislativas */}
+            {activeTab === "comisiones" && (
+              <motion.div
+                key="comisiones"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+              >
+                {COMISIONES.map((c, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-5 hover:shadow-md hover:border-blue-300 transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center mb-3">
+                        <Scale className="w-4 h-4" />
+                      </div>
+                      <h4 className="text-sm font-bold text-slate-900 mb-1.5 leading-snug">
+                        {c.name}
+                      </h4>
+                      <span className="inline-block text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md mb-2">
+                        {c.titular}
+                      </span>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        {c.focus}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* 3. Secretaría y Control */}
+            {activeTab === "control" && (
+              <motion.div
+                key="control"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              >
+                {CONTROL.map((item, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-3xl border border-slate-200/90 shadow-md p-6 hover:shadow-xl transition-all"
+                  >
+                    <div className="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-4 shadow-sm">
+                      <FileText className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    <h4 className="text-base font-bold text-slate-900 mb-2">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {item.duty}
+                    </p>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* 4. Direcciones y Atención */}
+            {activeTab === "admin" && (
+              <motion.div
+                key="admin"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+              >
+                {ADMIN.map((item, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-5 hover:shadow-md hover:border-emerald-300 transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-3">
+                        <Briefcase className="w-4 h-4" />
+                      </div>
+                      <h4 className="text-sm font-bold text-slate-900 mb-2 leading-snug">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        {item.duty}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+          </AnimatePresence>
+        </div>
+
+        {/* Bottom Graphic Chart Download Button */}
+        <div className="mt-12 text-center">
+          <a
+            href="/images/organigrama.png"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 hover:text-slate-900 text-xs font-bold transition-all shadow-sm hover:scale-105 active:scale-95"
+          >
+            <Download className="w-4 h-4 text-blue-600" />
+            <span>Descargar Gráfico Estructural Completo (PNG)</span>
+          </a>
+        </div>
+
       </div>
     </section>
   );

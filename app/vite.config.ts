@@ -9,6 +9,9 @@ export default defineConfig({
   plugins: [inspectAttr(), react()],
   server: {
     port: 3000,
+    watch: {
+      ignored: ['**/docs/**', '**/.git/**', '**/public/docs/**', '**/.agent/**']
+    }
   },
   resolve: {
     alias: {

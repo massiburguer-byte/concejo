@@ -28,3 +28,6 @@ app/dist-ssr/
 *.njsproj
 *.sln
 *.sw?
+.agent/
+app/.agent/
+mcp_config.json
