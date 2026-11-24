@@ -52,11 +52,11 @@ export default function Hero() {
   };
 
   return (
-    <section id="inicio" className="pt-24 sm:pt-28 pb-10 px-3 sm:px-6 lg:px-8 bg-[#eef3f8]">
+    <section id="inicio" className="relative pt-[env(safe-area-inset-top,0px)] sm:pt-28 pb-6 sm:pb-10 px-0 sm:px-6 lg:px-8 bg-[#0a192f] sm:bg-[#eef3f8]">
       <div className="max-w-6xl mx-auto">
 
-        {/* Top Institutional Badge Bar */}
-        <div className="flex items-center justify-between gap-3 mb-4 px-1">
+        {/* Top Institutional Badge Bar (En Desktop) */}
+        <div className="hidden sm:flex items-center justify-between gap-3 mb-4 px-1">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-slate-200/90 shadow-2xs">
             <Building2 className="w-3.5 h-3.5 text-blue-700" />
             <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">
@@ -64,17 +64,17 @@ export default function Hero() {
             </span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500 font-medium">
+          <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Sede Municipal: Plaza Bolívar de Pampatar • Isla de Margarita</span>
           </div>
         </div>
 
-        {/* Main Card Container */}
-        <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-slate-200/90 shadow-xl overflow-hidden p-3 sm:p-5 transition-all">
+        {/* Main Hero Container: Borde a borde en móvil (Full Screen App Feel), Card en Desktop */}
+        <div className="relative bg-slate-950 sm:bg-white sm:rounded-[2.5rem] sm:border sm:border-slate-200/90 sm:shadow-xl overflow-hidden p-0 sm:p-5 transition-all">
 
-          {/* 1. Hero Community Carousel Banner */}
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] xs:aspect-[16/10] sm:aspect-[16/7] md:aspect-[16/6] min-h-[360px] sm:min-h-[400px] bg-slate-900 shadow-md">
+          {/* 1. Hero Community Carousel Banner (Ocupa la pantalla en móvil con visualización nítida y completa) */}
+          <div className="relative overflow-hidden w-full h-[75vh] min-h-[500px] sm:h-auto sm:min-h-[440px] sm:aspect-[16/7] md:aspect-[16/6] sm:rounded-3xl bg-slate-950 shadow-md">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -87,18 +87,18 @@ export default function Hero() {
                 <img
                   src={INSTITUTIONAL_SLIDES[currentSlide].image}
                   alt={INSTITUTIONAL_SLIDES[currentSlide].quote}
-                  className="w-full h-full object-cover object-top sm:object-center transition-transform duration-1000"
+                  className="w-full h-full object-cover object-top sm:object-[center_20%] transition-transform duration-1000"
                 />
                 
-                {/* Modern Cinematic Gradients */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-slate-950/20" />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-transparent to-transparent" />
+                {/* Modern Cinematic Gradients adaptados para legibilidad sin tapar los rostros */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950/40 sm:to-slate-950/20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-transparent to-slate-950/40 sm:to-transparent" />
               </motion.div>
             </AnimatePresence>
 
             {/* Top Right Period Badge */}
-            <div className="absolute top-3 right-3 sm:top-5 sm:right-6 z-20">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-emerald-400 text-xs font-semibold shadow-md">
+            <div className="absolute top-16 sm:top-5 right-4 sm:right-6 z-20">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/15 text-emerald-400 text-xs font-semibold shadow-lg">
                 <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 stroke-[3]" />
                 <span className="tracking-wide text-white font-bold text-[10px] sm:text-xs">
                   {INSTITUTIONAL_SLIDES[currentSlide].period}
@@ -110,20 +110,20 @@ export default function Hero() {
             <button
               onClick={handlePrevSlide}
               aria-label="Slide anterior"
-              className="absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950/60 hover:bg-slate-950/85 backdrop-blur-md text-white flex items-center justify-center border border-white/10 transition-all hover:scale-105 active:scale-95"
+              className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/70 hover:bg-slate-950/90 backdrop-blur-md text-white flex items-center justify-center border border-white/15 transition-all hover:scale-105 active:scale-95 shadow-md"
             >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNextSlide}
               aria-label="Slide siguiente"
-              className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950/60 hover:bg-slate-950/85 backdrop-blur-md text-white flex items-center justify-center border border-white/10 transition-all hover:scale-105 active:scale-95"
+              className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/70 hover:bg-slate-950/90 backdrop-blur-md text-white flex items-center justify-center border border-white/15 transition-all hover:scale-105 active:scale-95 shadow-md"
             >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ChevronRight className="w-5 h-5" />
             </button>
 
             {/* Bottom Hero Headline & Quote */}
-            <div className="absolute bottom-4 sm:bottom-7 left-3 sm:left-8 right-3 sm:right-8 z-20">
+            <div className="absolute bottom-5 sm:bottom-7 left-4 sm:left-8 right-4 sm:right-8 z-20">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${currentSlide}-text`}
@@ -133,10 +133,10 @@ export default function Hero() {
                   transition={{ duration: 0.4 }}
                   className="max-w-2xl"
                 >
-                  <h1 className="text-base sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug sm:leading-tight mb-1 sm:mb-2 drop-shadow-md">
+                  <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-snug sm:leading-tight mb-1.5 sm:mb-2 drop-shadow-lg">
                     {INSTITUTIONAL_SLIDES[currentSlide].quote}
                   </h1>
-                  <p className="text-[11px] sm:text-sm md:text-base text-slate-200/90 max-w-xl font-medium leading-relaxed drop-shadow line-clamp-2 sm:line-clamp-none">
+                  <p className="text-xs sm:text-sm md:text-base text-slate-200 max-w-xl font-medium leading-relaxed drop-shadow-md">
                     {INSTITUTIONAL_SLIDES[currentSlide].subtitle}
                   </p>
                 </motion.div>
@@ -150,7 +150,7 @@ export default function Hero() {
                     onClick={() => setCurrentSlide(i)}
                     aria-label={`Ir a slide ${i + 1}`}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      currentSlide === i ? "w-8 sm:w-10 bg-white" : "w-4 sm:w-5 bg-white/40 hover:bg-white/70"
+                      currentSlide === i ? "w-8 sm:w-10 bg-white shadow" : "w-4 sm:w-5 bg-white/40 hover:bg-white/70"
                     }`}
                   />
                 ))}
@@ -159,7 +159,7 @@ export default function Hero() {
           </div>
 
           {/* Live Chamber Status Ribbon */}
-          <div className="mt-4 mx-1 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-[#0a192f] to-blue-950 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md border border-white/10">
+          <div className="mx-3 my-3 sm:mx-1 sm:mt-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-[#0a192f] to-[#122b52] text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md border border-white/10">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/20 text-red-300 border border-red-500/30 text-[10px] font-black uppercase tracking-wider shrink-0">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
@@ -167,7 +167,7 @@ export default function Hero() {
               </div>
               <div className="text-xs sm:text-sm">
                 <span className="font-bold text-white">Próxima Sesión Ordinaria: </span>
-                <span className="text-slate-300">Jueves 10:00 AM • Salón de Sesiones Pampatar • Entrada Libre</span>
+                <span className="text-slate-300">Jueves 10:00 AM • Salón de Sesiones Pampatar</span>
               </div>
             </div>
             <button
