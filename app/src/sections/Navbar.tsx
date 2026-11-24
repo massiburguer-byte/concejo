@@ -97,7 +97,7 @@ export default function Navbar() {
   return (
     <>
       {/* Native App Top Status Bar Gradient (SafeArea on Mobile) */}
-      <div className="fixed top-0 inset-x-0 h-[env(safe-area-inset-top,0px)] bg-gradient-to-r from-slate-950 via-[#0a192f] to-blue-950 z-[60]" />
+      <div className="fixed top-0 inset-x-0 h-[env(safe-area-inset-top,0px)] bg-gradient-to-r from-slate-950 via-[#0a192f] to-[#0d2242] z-[60]" />
 
       <motion.nav
         initial={{ y: -100 }}
@@ -105,8 +105,8 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-[env(safe-area-inset-top,0px)] left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md py-2.5 sm:py-3 shadow-md border-b border-slate-200/80"
-            : "bg-white/90 backdrop-blur-sm py-3 sm:py-4 border-b border-slate-200/50"
+            ? "bg-gradient-to-r from-slate-950 via-[#0a192f] to-[#11294d] text-white py-2.5 sm:py-3 shadow-xl border-b border-white/10 backdrop-blur-xl"
+            : "bg-gradient-to-r from-[#0a192f] via-[#0d2242] to-[#153460] text-white py-3 sm:py-3.5 border-b border-white/10 shadow-lg backdrop-blur-md"
         }`}
       >
         <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -118,28 +118,28 @@ export default function Navbar() {
             className="flex items-center gap-2 group"
           >
             <div className="flex items-center gap-2 sm:gap-2.5">
-              <div className="relative">
+              <div className="relative p-1 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 shadow-sm">
                 <img 
                   src="/images/logo.png" 
                   alt="Logo Concejo Municipal Maneiro" 
-                  className="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+                  className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow" 
                 />
               </div>
 
               {/* Title & Verified Badge on Mobile & Desktop */}
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs sm:text-sm md:text-base font-black tracking-tight text-slate-900 leading-none">
+                  <span className="text-xs sm:text-sm md:text-base font-black tracking-tight text-white leading-none drop-shadow-sm">
                     Concejo Maneiro
                   </span>
                   <div 
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-2xs" 
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-blue-500 flex items-center justify-center text-white shrink-0 shadow-sm" 
                     title="Cuenta Oficial Verificada"
                   >
                     <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-[3]" />
                   </div>
                 </div>
-                <span className="text-[9px] sm:text-[10px] text-slate-500 font-semibold uppercase tracking-wider hidden xs:block">
+                <span className="text-[9px] sm:text-[10px] text-blue-200/80 font-semibold uppercase tracking-wider hidden xs:block">
                   Portal Oficial
                 </span>
               </div>
@@ -212,18 +212,18 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right Action Icons (Matching the design in the user screenshot) */}
+          {/* Right Action Icons (Matching the design in the user screenshot with premium gradient style) */}
           <div className="flex items-center gap-1.5 sm:gap-2">
             
             {/* 1. Chat / IA Message Bubble with green badge */}
             <button
               onClick={() => setAiModalOpen(true)}
-              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs"
+              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
               title="Asistente Ciudadano IA"
             >
-              <MessageSquare className="w-4 h-4 text-slate-700" />
+              <MessageSquare className="w-4 h-4 text-white" />
               {/* Green notification pill/dot */}
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white flex items-center justify-center text-[9px] font-bold text-white">
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-[#0a192f] flex items-center justify-center text-[9px] font-bold text-white shadow-2xs">
                 0
               </span>
             </button>
@@ -231,10 +231,10 @@ export default function Navbar() {
             {/* 2. Plus icon (Atención Vecino Express) */}
             <button
               onClick={() => setVecinoModalOpen(true)}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
               title="Atención al Vecino / Solicitud"
             >
-              <Plus className="w-4 h-4 text-slate-700" />
+              <Plus className="w-4 h-4 text-white" />
             </button>
 
             {/* 3. Compass / Explore Ordenanzas */}
@@ -243,20 +243,20 @@ export default function Navbar() {
                 const el = document.querySelector("#ordenanzas");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
               title="Explorar Ordenanzas"
             >
-              <Compass className="w-4 h-4 text-slate-700" />
+              <Compass className="w-4 h-4 text-white" />
             </button>
 
             {/* 4. Dark / Light Mode Toggle */}
             <button
               onClick={toggleDark}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
               title={isDark ? "Cambiar a Modo Claro" : "Cambiar a Modo Oscuro"}
               aria-label="Alternar tema"
             >
-              {isDark ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-slate-700" />}
+              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-white" />}
             </button>
 
             {/* 5. Accessibility Mode */}
@@ -264,8 +264,8 @@ export default function Navbar() {
               onClick={toggleEasyRead}
               className={`hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-full text-[11px] font-bold tracking-wide transition-all border ${
                 isEasyRead 
-                  ? "bg-blue-600 text-white border-blue-600 shadow-sm" 
-                  : "border-slate-200 bg-white text-slate-600 hover:bg-slate-100"
+                  ? "bg-blue-600 text-white border-blue-400 shadow-sm" 
+                  : "border-white/20 bg-white/10 text-white hover:bg-white/20"
               }`}
               title={isEasyRead ? "Desactivar Lectura Fácil" : "Activar Lectura Fácil"}
             >
@@ -275,14 +275,14 @@ export default function Navbar() {
 
             {/* Mobile menu toggle */}
             <button
-              className="md:hidden w-9 h-9 rounded-full border border-slate-200 bg-white text-slate-800 flex items-center justify-center"
+              className="md:hidden w-9 h-9 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               aria-label="Abrir menú"
             >
               {isMobileOpen ? (
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 text-white" />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className="w-5 h-5 text-white" />
               )}
             </button>
           </div>
