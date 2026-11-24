@@ -49,10 +49,10 @@ export default function AccesosRapidos() {
   };
 
   return (
-    <section className="relative z-20 py-6 sm:py-8 px-3 sm:px-6 bg-[#eef3f8]">
-      <div className="max-w-4xl mx-auto">
-        {/* Grid de 2 columnas: 2 arriba y 2 abajo, diseño compacto */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+    <section className="relative z-20 py-6 sm:py-8 px-3 sm:px-6 lg:px-8 bg-[#eef3f8]">
+      <div className="w-full max-w-7xl mx-auto">
+        {/* Móvil: 2 columnas (2 arriba, 2 abajo) | PC: En una sola fila horizontal (4 columnas) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
           {accesos.map((acceso, i) => {
             const Icon = acceso.icon;
             return (
