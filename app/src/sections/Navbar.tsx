@@ -96,17 +96,20 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Native App Top Status Bar Gradient (SafeArea on Mobile) */}
+      <div className="fixed top-0 inset-x-0 h-[env(safe-area-inset-top,0px)] bg-gradient-to-r from-slate-950 via-[#0a192f] to-blue-950 z-[60]" />
+
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-[env(safe-area-inset-top,0px)] left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md py-3 shadow-md border-b border-slate-200/80"
-            : "bg-white/90 backdrop-blur-sm py-4 border-b border-slate-200/50"
+            ? "bg-white/95 backdrop-blur-md py-2.5 sm:py-3 shadow-md border-b border-slate-200/80"
+            : "bg-white/90 backdrop-blur-sm py-3 sm:py-4 border-b border-slate-200/50"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
           
           {/* Logo & Verified Badge */}
           <a
@@ -114,18 +117,31 @@ export default function Navbar() {
             onClick={(e) => handleClick(e, "#inicio")}
             className="flex items-center gap-2 group"
           >
-            <div className="flex items-center gap-2.5">
-              <img 
-                src="/images/logo.png" 
-                alt="Logo Concejo Municipal Maneiro" 
-                className="h-10 sm:h-11 w-auto transition-transform duration-300 group-hover:scale-105" 
-              />
-              {/* Verified Blue Badge */}
-              <div 
-                className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-2xs" 
-                title="Cuenta Oficial Verificada"
-              >
-                <Check className="w-3 h-3 stroke-[3]" />
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              <div className="relative">
+                <img 
+                  src="/images/logo.png" 
+                  alt="Logo Concejo Municipal Maneiro" 
+                  className="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+                />
+              </div>
+
+              {/* Title & Verified Badge on Mobile & Desktop */}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs sm:text-sm md:text-base font-black tracking-tight text-slate-900 leading-none">
+                    Concejo Maneiro
+                  </span>
+                  <div 
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-2xs" 
+                    title="Cuenta Oficial Verificada"
+                  >
+                    <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-[3]" />
+                  </div>
+                </div>
+                <span className="text-[9px] sm:text-[10px] text-slate-500 font-semibold uppercase tracking-wider hidden xs:block">
+                  Portal Oficial
+                </span>
               </div>
             </div>
           </a>
