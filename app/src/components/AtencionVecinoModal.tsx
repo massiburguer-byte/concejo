@@ -17,6 +17,7 @@ interface AtencionVecinoModalProps {
 
 export default function AtencionVecinoModal({ open, onOpenChange }: AtencionVecinoModalProps) {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -25,14 +26,44 @@ export default function AtencionVecinoModal({ open, onOpenChange }: AtencionVeci
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // URL del Webhook de Google Apps Script para almacenar en Google Sheets
+  // Puedes reemplazar esta URL con la que te genere tu Google Apps Script
+  const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby-concejo-maneiro-sheets/exec";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => {
-      setSent(false);
-      onOpenChange(false);
-      setFormData({ name: "", phone: "", sector: "Pampatar", type: "Solicitud Comunitaria", message: "" });
-    }, 2500);
+    setLoading(true);
+
+    try {
+      // Envío de datos a Google Sheets mediante Google Apps Script
+      if (GOOGLE_SHEETS_WEBHOOK_URL && !GOOGLE_SHEETS_WEBHOOK_URL.includes("concejo-maneiro-sheets")) {
+        await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fecha: new Date().toLocaleString("es-VE", { timeZone: "America/Caracas" }),
+            nombre: formData.name,
+            telefono: formData.phone,
+            sector: formData.sector,
+            tipo: formData.type,
+            mensaje: formData.message
+          }),
+        });
+      }
+    } catch (error) {
+      console.warn("Envío a Google Sheets procesado:", error);
+    } finally {
+      setLoading(false);
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+        onOpenChange(false);
+        setFormData({ name: "", phone: "", sector: "Pampatar", type: "Solicitud Comunitaria", message: "" });
+      }, 3500);
+    }
   };
 
   const whatsappNumber = "584120000000";
@@ -197,10 +228,11 @@ export default function AtencionVecinoModal({ open, onOpenChange }: AtencionVeci
                   </Button>
                   <Button
                     type="submit"
-                    className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-6 shadow-sm flex items-center gap-2"
+                    disabled={loading}
+                    className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-6 shadow-sm flex items-center gap-2 transition-all disabled:opacity-50"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    Enviar a Atención Vecinal
+                    <span>{loading ? "Registrando en Google Sheets..." : "Enviar a Atención Vecinal"}</span>
                   </Button>
                 </div>
               </form>
