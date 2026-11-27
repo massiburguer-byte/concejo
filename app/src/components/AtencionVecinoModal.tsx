@@ -27,8 +27,7 @@ export default function AtencionVecinoModal({ open, onOpenChange }: AtencionVeci
   });
 
   // URL del Webhook de Google Apps Script para almacenar en Google Sheets
-  // Puedes reemplazar esta URL con la que te genere tu Google Apps Script
-  const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby-concejo-maneiro-sheets/exec";
+  const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz3OMm52xllYJs54R0X7dWx1k2bRhay9CoLuDQMJZE9isDUI4bGDa1rm1iqzCCcqQyPXQ/exec";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,23 +35,21 @@ export default function AtencionVecinoModal({ open, onOpenChange }: AtencionVeci
 
     try {
       // Envío de datos a Google Sheets mediante Google Apps Script
-      if (GOOGLE_SHEETS_WEBHOOK_URL && !GOOGLE_SHEETS_WEBHOOK_URL.includes("concejo-maneiro-sheets")) {
-        await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fecha: new Date().toLocaleString("es-VE", { timeZone: "America/Caracas" }),
-            nombre: formData.name,
-            telefono: formData.phone,
-            sector: formData.sector,
-            tipo: formData.type,
-            mensaje: formData.message
-          }),
-        });
-      }
+      await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fecha: new Date().toLocaleString("es-VE", { timeZone: "America/Caracas" }),
+          nombre: formData.name,
+          telefono: formData.phone,
+          sector: formData.sector,
+          tipo: formData.type,
+          mensaje: formData.message
+        }),
+      });
     } catch (error) {
       console.warn("Envío a Google Sheets procesado:", error);
     } finally {
